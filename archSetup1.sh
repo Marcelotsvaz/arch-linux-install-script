@@ -66,22 +66,20 @@ systemctl enable systemd-{networkd,resolved,timesyncd}
 efiPartUuid='58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 
 # Generate initramfs.
-hooks='base udev autodetect modconf block keyboard zfs filesystems'
-sed -Ei "s/^HOOKS=.*/HOOKS=(${hooks})/" /etc/mkinitcpio.conf # Add zfs to HOOKS.
-# sed -Ei "s/^MODULES=.*/MODULES=('amdgpu')/" /etc/mkinitcpio.conf # Add amdgpu to MODULES.
-sed -Ei "s/^PRESETS=.*/PRESETS=('default')/" /etc/mkinitcpio.d/linux.preset # Remove fallback preset.
+sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf)/' /etc/mkinitcpio.conf # Add zfs to HOOKS and remove unneeded stuff.
+sed -Ei 's/^MODULES=.*/MODULES=(zfs)/' /etc/mkinitcpio.conf # Add zfs to MODULES.
+sed -Ei 's/^PRESETS=.*/PRESETS=(default)/' /etc/mkinitcpio.d/linux.preset # Remove fallback preset.
 
 mkinitcpio -p linux
 
-# --disk "/dev/disk/by-partuuid/${efiPartUuid}"	\
+
 # UEFI boot entry.
 efibootmgr										\
 --create										\
---disk /dev/sda									\
---part 1										\
+--disk "/dev/disk/by-partuuid/${efiPartUuid}"	\
 --label 'Arch Linux'							\
 --loader '/vmlinuz-linux'						\
---unicode 'initrd=\intel-ucode.img initrd=\initramfs-linux.img zfs=rootPool/root/default rw'
+--unicode 'initrd=\intel-ucode.img initrd=\initramfs-linux.img zfs=rootPool/root/default rw quiet udev.log_level=3'
 
 
 # Mount EFI partition on boot.

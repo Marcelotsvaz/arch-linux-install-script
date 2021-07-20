@@ -1,10 +1,8 @@
 ZFS
     Encryption
     hostid
-Early mode setting > Slower?
-Fix mkinitcpio ucode and space and hooks
+Fix mkinitcpio ucode and space
 random.trust_cpu=on
-silent boot
 Unified image and secure boot
 Backups
 ZSH
