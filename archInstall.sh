@@ -102,8 +102,8 @@ zfs list -o name,mountpoint,mounted
 
 
 # Mount the EFI partiton on /boot folder of the new root.
-mkdir ${mountPoint}/boot
-mount ${efiPartition} ${mountPoint}/boot
+mkdir -p ${mountPoint}/boot/efi
+mount ${efiPartition} ${mountPoint}/boot/efi
 
 
 

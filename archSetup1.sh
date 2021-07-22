@@ -9,6 +9,9 @@
 
 # Install packages
 ####################################################################################################
+# Enable archzfs repository.
+pacman-key --keyserver keyserver.ubuntu.com --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
+pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 #-------------------------------------------------------------------------------
 cat >> /etc/pacman.conf << 'EOF'
 [archzfs]
@@ -16,11 +19,12 @@ Server = https://archzfs.com/$repo/$arch
 EOF
 #-------------------------------------------------------------------------------
 
-# archzfs keys.
-pacman-key --keyserver keyserver.ubuntu.com --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
-pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 
-system='linux linux-firmware intel-ucode zfs-linux mkinitcpio efibootmgr'
+# Mask mkinitcpio hook.
+mkdir /etc/pacman.d/hooks
+ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
+
+system='linux linux-firmware intel-ucode zfs-linux mkinitcpio binutils efibootmgr'
 toolsCli='sudo nano zsh tmux gdisk man-db openssh'
 pacman --noconfirm -Sy ${system} ${toolsCli}
 
@@ -39,8 +43,8 @@ hwclock --systohc
 
 
 # Localization.
-sed -Ei 's/^#(en_US\.UTF-8 UTF-8)/\1/' /etc/locale.gen # Uncomment #en_US.UTF-8 UTF-8.
-sed -Ei 's/^#(pt_BR\.UTF-8 UTF-8)/\1/' /etc/locale.gen # Uncomment #pt_BR.UTF-8 UTF-8.
+sed -Ei 's/^#(en_US\.UTF-8 UTF-8)/\1/' /etc/locale.gen	# Uncomment #en_US.UTF-8 UTF-8.
+sed -Ei 's/^#(pt_BR\.UTF-8 UTF-8)/\1/' /etc/locale.gen	# Uncomment #pt_BR.UTF-8 UTF-8.
 locale-gen
 echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 
@@ -65,25 +69,83 @@ systemctl enable systemd-{networkd,resolved,timesyncd}
 ####################################################################################################
 efiPartUuid='58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 
-# Generate initramfs.
-sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf)/' /etc/mkinitcpio.conf # Add zfs to HOOKS and remove unneeded stuff.
-sed -Ei 's/^MODULES=.*/MODULES=(zfs)/' /etc/mkinitcpio.conf # Add zfs to MODULES.
-sed -Ei 's/^PRESETS=.*/PRESETS=(default)/' /etc/mkinitcpio.d/linux.preset # Remove fallback preset.
 
-mkinitcpio -p linux
+# Configure mkinitcpio.
+sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf)/' /etc/mkinitcpio.conf	# Add zfs to HOOKS and remove unneeded stuff.
+sed -Ei 's/^MODULES=.*/MODULES=(zfs)/' /etc/mkinitcpio.conf	# Add zfs to MODULES.
+sed -Ei 's/^PRESETS=.*/PRESETS=(default)/' /usr/share/mkinitcpio/hook.preset	# Remove fallback preset.
+
+
+rm /etc/pacman.d/hooks/90-mkinitcpio-install.hook	# Remove symlink to /dev/null.
+#-------------------------------------------------------------------------------
+cat > /etc/pacman.d/hooks/90-mkinitcpio-install.hook << 'EOF'
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/initcpio/*
+
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = intel-ucode
+Target = amd-ucode
+
+[Action]
+Description = Updating linux initcpios...
+When = PostTransaction
+Exec = /bin/sh -c '/usr/share/libalpm/scripts/mkinitcpio-install && /usr/local/share/libalpm/scripts/mkinitcpio-install-unified'
+NeedsTargets
+EOF
+#-------------------------------------------------------------------------------
+
+mkdir -p /usr/local/share/libalpm/scripts
+#-------------------------------------------------------------------------------
+cat > /usr/local/share/libalpm/scripts/mkinitcpio-install-unified << 'EOF'
+#!/bin/bash
+kernelParameters='zfs=rootPool/root/default rw quiet udev.log_level=3'
+
+cd /boot
+for kernel in vmlinuz-*; do
+	pkgbase=${kernel#vmlinuz-}
+	
+	cat $(compgen -G *-ucode.img) initramfs-${pkgbase}.img > unified-initramfs-${pkgbase}.img
+	echo ${kernelParameters} > cmdline
+	objcopy																											\
+		--change-section-vma .osrel=0x20000		--add-section .osrel='/usr/lib/os-release'							\
+		--change-section-vma .cmdline=0x30000	--add-section .cmdline='cmdline'									\
+		--change-section-vma .splash=0x40000	--add-section .splash='/usr/share/systemd/bootctl/splash-arch.bmp'	\
+		--change-section-vma .linux=0x2000000	--add-section .linux="vmlinuz-${pkgbase}"							\
+		--change-section-vma .initrd=0x3000000	--add-section .initrd="unified-initramfs-${pkgbase}.img"			\
+		'/usr/lib/systemd/boot/efi/linuxx64.efi.stub'																\
+		"efi/${pkgbase}.efi"
+	
+	rm unified-initramfs-${pkgbase}.img cmdline
+done
+EOF
+#-------------------------------------------------------------------------------
+chmod +x /usr/local/share/libalpm/scripts/mkinitcpio-install-unified
+
+
+# Install kernel.
+pacman --noconfirm -S linux
 
 
 # UEFI boot entry.
-efibootmgr										\
---create										\
---disk "/dev/disk/by-partuuid/${efiPartUuid}"	\
---label 'Arch Linux'							\
---loader '/vmlinuz-linux'						\
---unicode 'initrd=\intel-ucode.img initrd=\initramfs-linux.img zfs=rootPool/root/default rw quiet udev.log_level=3'
+cd /boot/efi
+for kernel in *.efi; do
+	efibootmgr										\
+	--create										\
+	--disk "/dev/disk/by-partuuid/${efiPartUuid}"	\
+	--label 'Arch Linux'							\
+	--loader "/${kernel}"
+done
 
 
 # Mount EFI partition on boot.
-echo "PARTUUID=${efiPartUuid}	/boot	vfat	rw	0	0" >> /etc/fstab
+echo "PARTUUID=${efiPartUuid}	/boot/efi	vfat	rw	0	0" >> /etc/fstab
 
 
 
@@ -103,7 +165,7 @@ echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel
 
 
 # OpenSSL.
-sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\0/' /etc/ssl/openssl.cnf # Add ".include custom.cnf".
+sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
 #-------------------------------------------------------------------------------
 cat > /etc/ssl/custom.cnf << 'EOF'
 # Custom configuration.

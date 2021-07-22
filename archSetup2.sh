@@ -9,7 +9,7 @@
 
 # Development Tools
 ####################################################################################################
-dependencies='' # base-devel cmake extra-cmake-modules
+dependencies='base-devel' # cmake extra-cmake-modules
 developmentTools='mercurial git aws-cli'
 pacman --noconfirm -S ${dependencies} ${developmentTools}
 
@@ -38,10 +38,10 @@ pacman --noconfirm -S ${everydaySoftware} ${developmentSoftware} ${misc}
 
 # Games
 ####################################################################################################
-# gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
-# games='steam'
+gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
+games='steam'
 
 # Enable multilib repository.
-# perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
+perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
 
-# pacman --noconfirm -Sy ${gpuDrivers} ${games}
+pacman --noconfirm -Sy ${gpuDrivers} ${games}
