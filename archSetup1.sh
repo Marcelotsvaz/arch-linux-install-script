@@ -156,7 +156,7 @@ mkdir -m 700 /etc/skel/.ssh
 touch /etc/skel/.ssh/authorized_keys
 rm /etc/skel/.bash*
 
-useradd -mG wheel marcelotsvaz
+useradd -mG wheel -c 'Marcelo Vaz' marcelotsvaz
 passwd -d marcelotsvaz
 
 
