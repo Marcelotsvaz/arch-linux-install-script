@@ -46,7 +46,15 @@ hwclock --systohc
 sed -Ei 's/^#(en_US\.UTF-8 UTF-8)/\1/' /etc/locale.gen	# Uncomment #en_US.UTF-8 UTF-8.
 sed -Ei 's/^#(pt_BR\.UTF-8 UTF-8)/\1/' /etc/locale.gen	# Uncomment #pt_BR.UTF-8 UTF-8.
 locale-gen
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+#-------------------------------------------------------------------------------
+cat > /etc/locale.conf << 'EOF'
+LANG=en_US.UTF-8
+LC_TIME=pt_BR.UTF-8
+LC_MEASUREMENT=pt_BR.UTF-8
+LC_PAPER=pt_BR.UTF-8
+LC_TELEPHONE=pt_BR.UTF-8
+EOF
+#-------------------------------------------------------------------------------
 
 
 # Network.
