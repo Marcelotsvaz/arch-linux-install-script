@@ -24,9 +24,16 @@ EOF
 mkdir /etc/pacman.d/hooks
 ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
+
+# Install packages.
 system='linux linux-firmware intel-ucode linux-headers mkinitcpio binutils efibootmgr'
 toolsCli='sudo nano zsh tmux gdisk man-db openssh'
 pacman --noconfirm -Sy ${system} ${toolsCli}
+
+
+# Install AUR packages.
+/aur.sh mkinitcpio-numlock
+
 
 systemctl enable zfs-mount zfs.target
 
@@ -79,9 +86,9 @@ efiPartUuid='58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 
 
 # Configure mkinitcpio.
-sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf)/' /etc/mkinitcpio.conf	# Add zfs to HOOKS and remove unneeded stuff.
-sed -Ei 's/^MODULES=.*/MODULES=(zfs)/' /etc/mkinitcpio.conf	# Add zfs to MODULES.
-sed -Ei 's/^PRESETS=.*/PRESETS=(default)/' /usr/share/mkinitcpio/hook.preset	# Remove fallback preset.
+sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf numlock)/'	/etc/mkinitcpio.conf	# Add zfs to HOOKS and remove unneeded stuff.
+sed -Ei 's/^MODULES=.*/MODULES=(zfs)/'					/etc/mkinitcpio.conf	# Add zfs to MODULES.
+sed -Ei 's/^PRESETS=.*/PRESETS=(default)/'				/usr/share/mkinitcpio/hook.preset	# Remove fallback preset.
 
 
 rm /etc/pacman.d/hooks/90-mkinitcpio-install.hook	# Remove symlink to /dev/null.

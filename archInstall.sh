@@ -115,10 +115,16 @@ pacstrap -c ${mountPoint} base
 
 # Chroot
 ####################################################################################################
-cp $(dirname "$0")/archSetup*.sh ${mountPoint}
+cp $(dirname "$0")/{archSetup*,aur}.sh ${mountPoint}
 arch-chroot ${mountPoint} /archSetup1.sh
 arch-chroot ${mountPoint} /archSetup2.sh
-rm ${mountPoint}/archSetup*.sh
+rm ${mountPoint}/{archSetup*,aur}.sh
+
+
+
+# Restore backup
+####################################################################################################
+$(dirname "$0")/backup.sh
 
 
 
