@@ -24,7 +24,7 @@ EOF
 mkdir /etc/pacman.d/hooks
 ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
-system='linux linux-firmware intel-ucode zfs-linux mkinitcpio binutils efibootmgr'
+system='linux linux-firmware intel-ucode linux-headers mkinitcpio binutils efibootmgr'
 toolsCli='sudo nano zsh tmux gdisk man-db openssh'
 pacman --noconfirm -Sy ${system} ${toolsCli}
 
@@ -130,7 +130,7 @@ chmod +x /usr/local/share/libalpm/scripts/mkinitcpio-install-unified
 
 
 # Install kernel.
-pacman --noconfirm -S linux
+pacman --noconfirm -S linux zfs-dkms
 
 
 # UEFI boot entry.
