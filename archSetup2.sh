@@ -53,3 +53,31 @@ pacman --noconfirm -Sy ${gpuDrivers} ${games}
 # Enable Microsoft VSCode marketplace.
 sed -Ei 's/("serviceUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery",/' /usr/lib/code/product.json
 sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\t\t"cacheUrl": "https:\/\/vscode.blob.core.windows.net\/gallery\/index"/' /usr/lib/code/product.json
+
+
+
+# Restore backup
+####################################################################################################
+# Mount SMB shares.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/mnt-truenas.mount << 'EOF'
+[Unit]
+Description = Mount SMB shares
+
+[Mount]
+What = //truenas.lan/marcelotsvaz
+Where = /mnt/truenas
+Type = cifs
+Options = credentials=/etc/samba/credentials/truenas
+TimeoutSec = 30
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
+
+mkdir /etc/samba/credentials
+chmod 700 /etc/samba/credentials
+
+touch /etc/samba/credentials/truenas
+chmod 600 /etc/samba/credentials/truenas

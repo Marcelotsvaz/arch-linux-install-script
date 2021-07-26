@@ -160,7 +160,21 @@ done
 
 
 # Mount EFI partition on boot.
-echo "PARTUUID=${efiPartUuid}	/boot/efi	vfat	rw	0	0" >> /etc/fstab
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/boot-efi.mount << 'EOF'
+[Unit]
+Description = Mount EFI partition
+
+[Mount]
+What = /dev/disk/by-partuuid/${efiPartUuid}
+Where = /boot/efi
+Type = vfat
+Options = rw
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
 
 
 
