@@ -81,3 +81,5 @@ chmod 700 /etc/samba/credentials
 
 touch /etc/samba/credentials/truenas
 chmod 600 /etc/samba/credentials/truenas
+
+# $(dirname "$0")/backup.sh home/marcelotsvaz src ${mountPoint}

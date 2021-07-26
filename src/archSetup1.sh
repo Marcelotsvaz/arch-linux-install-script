@@ -32,7 +32,7 @@ pacman --noconfirm -Sy ${system} ${toolsCli}
 
 
 # Install AUR packages.
-/aur.sh mkinitcpio-numlock
+/deploy/aur.sh mkinitcpio-numlock
 
 
 systemctl enable zfs-mount zfs.target
