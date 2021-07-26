@@ -124,7 +124,7 @@ rm ${mountPoint}/{archSetup*,aur}.sh
 
 # Restore backup
 ####################################################################################################
-$(dirname "$0")/backup.sh
+$(dirname "$0")/backup.sh home/marcelotsvaz src ${mountPoint}
 
 
 
