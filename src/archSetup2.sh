@@ -7,15 +7,12 @@
 
 
 
-# Development Tools
-####################################################################################################
-dependencies='base-devel'
-developmentTools='mercurial git aws-cli'
-pacman --noconfirm -S ${dependencies} ${developmentTools}
+# Abort on error.
+set -e
 
 
 
-# Desktop Enviroment
+# Desktop enviroment.
 ####################################################################################################
 desktopEnvironment='plasma-desktop phonon-qt5-vlc ttf-liberation plasma-wayland-session sddm'
 applets='kscreen kmix kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
@@ -27,7 +24,7 @@ systemctl enable sddm
 
 
 
-# Main Applications
+# Main applications.
 ####################################################################################################
 everydaySoftware='firefox thunderbird vlc discord keepassxc'
 developmentSoftware='konsole code'
@@ -36,10 +33,10 @@ pacman --noconfirm -S ${everydaySoftware} ${developmentSoftware} ${misc}
 
 
 
-# Games
+# Games.
 ####################################################################################################
 gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
-# games='steam'
+games='steam'
 
 # Enable multilib repository.
 perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
@@ -48,38 +45,8 @@ pacman --noconfirm -Sy ${gpuDrivers} ${games}
 
 
 
-# Configure software
+# Configure software.
 ####################################################################################################
 # Enable Microsoft VSCode marketplace.
 sed -Ei 's/("serviceUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery",/' /usr/lib/code/product.json
 sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\t\t"cacheUrl": "https:\/\/vscode.blob.core.windows.net\/gallery\/index"/' /usr/lib/code/product.json
-
-
-
-# Restore backup
-####################################################################################################
-# Mount SMB shares.
-#-------------------------------------------------------------------------------
-cat > /etc/systemd/system/mnt-truenas.mount << 'EOF'
-[Unit]
-Description = Mount SMB shares
-
-[Mount]
-What = //truenas.lan/marcelotsvaz
-Where = /mnt/truenas
-Type = cifs
-Options = credentials=/etc/samba/credentials/truenas
-TimeoutSec = 30
-
-[Install]
-WantedBy = multi-user.target
-EOF
-#-------------------------------------------------------------------------------
-
-mkdir /etc/samba/credentials
-chmod 700 /etc/samba/credentials
-
-touch /etc/samba/credentials/truenas
-chmod 600 /etc/samba/credentials/truenas
-
-# $(dirname "$0")/backup.sh home/marcelotsvaz src ${mountPoint}

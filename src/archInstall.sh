@@ -7,7 +7,12 @@
 
 
 
-# Prepare installer
+# Abort on error.
+set -e
+
+
+
+# Prepare installer.
 ####################################################################################################
 reflector --protocol https --latest 25 --sort rate --save /etc/pacman.d/mirrorlist
 
@@ -19,14 +24,15 @@ modprobe zfs
 
 
 
-# Variables
+# Variables.
 ####################################################################################################
 mountPoint='/mnt/new'
+backupDir='/mnt/truenas/marcelotsvaz'
 # diskSerial='S1AXNSAD703273K'
 
 
 
-# Partitioning and Filesystem
+# Partitioning and filesystem.
 ####################################################################################################
 # disk=$(lsblk -nro PATH,SERIAL | grep ${diskSerial} | cut -d ' ' -f1)
 targetDevice='/dev/disk/by-partuuid/bcde2fd2-2edb-4f31-b875-6c475a0cae7e'
@@ -98,7 +104,6 @@ zfs create					\
 
 
 zpool set bootfs=rootPool/root/default rootPool
-zfs list -o name,mountpoint,mounted
 
 
 # Mount the EFI partiton on /boot folder of the new root.
@@ -107,13 +112,13 @@ mount ${efiPartition} ${mountPoint}/boot/efi
 
 
 
-# Install Arch Linux
+# Install Arch Linux.
 ####################################################################################################
 pacstrap -c ${mountPoint} base
 
 
 
-# Chroot
+# Chroot.
 ####################################################################################################
 mkdir ${mountPoint}/deploy
 cp $(dirname "$0")/* ${mountPoint}/deploy/
@@ -123,7 +128,15 @@ rm -r ${mountPoint}/deploy
 
 
 
-# Cleanup
+# Restore configuration.
+####################################################################################################
+mkdir -p ${backupDir}
+mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=$(dirname "$0")/../credentials
+$(dirname "$0")/backup.sh home/marcelotsvaz ${backupDir}/Backups/Linux ${mountPoint}
+
+
+
+# Cleanup.
 ####################################################################################################
 # Can't do it inside chroot.
 ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf

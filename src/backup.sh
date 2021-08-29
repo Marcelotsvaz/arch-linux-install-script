@@ -55,7 +55,7 @@ for file in "${system[@]}"; do
 	files+="${src}/./${file} "
 done
 
-sudo rsync -aRvn ${files} "${dest}"
+sudo rsync --ignore-missing-args -aRv ${files} "${dest}"
 
 
 

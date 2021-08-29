@@ -7,7 +7,12 @@
 
 
 
-# Install packages
+# Abort on error.
+set -e
+
+
+
+# Install packages.
 ####################################################################################################
 # Enable archzfs repository.
 pacman-key --keyserver keyserver.ubuntu.com --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
@@ -26,20 +31,18 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
 
 # Install packages.
-system='linux linux-firmware intel-ucode linux-headers mkinitcpio binutils efibootmgr'
-toolsCli='sudo nano zsh tmux gdisk man-db openssh'
-pacman --noconfirm -Sy ${system} ${toolsCli}
+system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
+toolsCli='sudo zsh tmux nano gdisk man-db'
+developmentTools='mercurial git aws-cli openssh'
+pacman --noconfirm -Sy ${system} ${toolsCli} ${developmentTools}
 
 
 # Install AUR packages.
 /deploy/aur.sh mkinitcpio-numlock
 
 
-systemctl enable zfs-mount zfs.target
 
-
-
-# Standard Configuration
+# Standard configuration.
 ####################################################################################################
 # Time zone.
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -80,7 +83,7 @@ systemctl enable systemd-{networkd,resolved,timesyncd}
 
 
 
-# Boot
+# Boot.
 ####################################################################################################
 efiPartUuid='58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 
@@ -146,6 +149,7 @@ chmod +x /usr/local/share/libalpm/scripts/mkinitcpio-install-unified
 
 # Install kernel.
 pacman --noconfirm -S linux zfs-dkms
+systemctl enable zfs-mount zfs.target
 
 
 # UEFI boot entry.
@@ -161,7 +165,7 @@ done
 
 # Mount EFI partition on boot.
 #-------------------------------------------------------------------------------
-cat > /etc/systemd/system/boot-efi.mount << 'EOF'
+cat > /etc/systemd/system/boot-efi.mount << EOF
 [Unit]
 Description = Mount EFI partition
 
@@ -176,9 +180,11 @@ WantedBy = multi-user.target
 EOF
 #-------------------------------------------------------------------------------
 
+systemctl enable boot-efi.mount
 
 
-# Custom Configuration
+
+# Custom configuration.
 ####################################################################################################
 # Users.
 mkdir -m 700 /etc/skel/.ssh
@@ -249,3 +255,33 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 EOF
 #-------------------------------------------------------------------------------
+
+
+
+# Mount SMB shares.
+####################################################################################################
+# Mount SMB shares.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/mnt-truenas-marcelotsvaz.mount << 'EOF'
+[Unit]
+Description = Mount SMB shares
+
+[Mount]
+What = //truenas.lan/marcelotsvaz
+Where = /mnt/truenas/marcelotsvaz
+Type = cifs
+Options = credentials=/etc/samba/credentials/truenas
+TimeoutSec = 30
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
+
+systemctl enable mnt-truenas-marcelotsvaz.mount
+
+mkdir -p /etc/samba/credentials
+chmod 700 /etc/samba/credentials
+
+touch /etc/samba/credentials/truenas
+chmod 600 /etc/samba/credentials/truenas

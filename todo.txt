@@ -1,8 +1,24 @@
 ZFS
-    Encryption
-    hostid
+	Encryption
+	hostid
 random.trust_cpu=on
 Secure boot
-Backups
 ZSH
 UEFI Hacking
+VAZnet CA
+	sudo trust anchor certificate.pem
+
+
+
+Slow animations:
+	NO -initramfs modules? autodetect?
+	NO - zfs?
+	Small update : Disabling compositing (Alt+Shift+F12) removes the choppiness on firefox scrolling, so I guess there's something wrong with KWin... Which kwin settings should I tweak ?
+	xf86-video-intel, xf86-video-vesa, xf86-video-fbdev
+	https://www.fosskers.ca/en/blog/wayland
+	https://wiki.archlinux.org/title/ATI
+	https://wiki.archlinux.org/title/AMDGPU#AMDGPU_PRO
+	
+	https://github.com/Prayag2/konsave/blob/master/konsave/conf_kde.yaml
+	https://github.com/rubenaleman/kde-plasma-backup/blob/master/kde-plasma-backup.sh
+	https://old.reddit.com/r/kde/comments/654dwo/how_can_i_make_my_kde_configs_portable/
