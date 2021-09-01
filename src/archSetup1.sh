@@ -277,8 +277,23 @@ TimeoutSec = 30
 WantedBy = multi-user.target
 EOF
 #-------------------------------------------------------------------------------
+cat > /etc/systemd/system/mnt-truenas-media.mount << 'EOF'
+[Unit]
+Description = Mount SMB shares
 
-systemctl enable mnt-truenas-marcelotsvaz.mount
+[Mount]
+What = //truenas.lan/media
+Where = /mnt/truenas/media
+Type = cifs
+Options = credentials=/etc/samba/credentials/truenas
+TimeoutSec = 30
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
+
+systemctl enable mnt-truenas-marcelotsvaz.mount mnt-truenas-media.mount
 
 mkdir -p /etc/samba/credentials
 chmod 700 /etc/samba/credentials
