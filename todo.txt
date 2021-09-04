@@ -2,11 +2,32 @@ ZFS
 	Encryption
 	hostid
 random.trust_cpu=on
+Noto bloat
 Secure boot
 ZSH
 UEFI Hacking
 VAZnet CA
 	sudo trust anchor certificate.pem
+Thunderbird config
+
+Native apps:
+	Music player
+	PDF viewer
+	Image viewer
+	LibreOffice
+	iV Cam
+	Minecraft
+	Fan control
+
+Wine:
+	Inventor
+	Revit
+	Affinity Photo
+	Affinity Designer
+
+
+
+
 
 
 

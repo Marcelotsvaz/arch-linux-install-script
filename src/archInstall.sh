@@ -14,7 +14,9 @@ set -e
 
 # Prepare installer.
 ####################################################################################################
-reflector --protocol https --latest 25 --sort rate --save /etc/pacman.d/mirrorlist
+sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDownloads
+
+reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 curl -O http://archzfs.com/archive_archzfs/zfs-linux-2.0.5_5.12.13.arch1.2-1-x86_64.pkg.tar.zst
 curl -O http://archzfs.com/archive_archzfs/zfs-utils-2.0.5-1-x86_64.pkg.tar.zst
@@ -27,7 +29,7 @@ modprobe zfs
 # Variables.
 ####################################################################################################
 mountPoint='/mnt/new'
-backupDir='/mnt/truenas/marcelotsvaz'
+backupDir='/mnt/truenas/home'
 # diskSerial='S1AXNSAD703273K'
 
 
@@ -131,8 +133,9 @@ rm -r ${mountPoint}/deploy
 # Restore configuration.
 ####################################################################################################
 mkdir -p ${backupDir}
-mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=$(dirname "$0")/../credentials
-$(dirname "$0")/backup.sh home/marcelotsvaz ${backupDir}/Backups/Linux ${mountPoint}
+mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=$(dirname "$0")/../credentials,cifsacl
+$(dirname "$0")/backup.py ${backupDir}/Backups/Linux ${mountPoint}
+umount ${backupDir}
 
 
 

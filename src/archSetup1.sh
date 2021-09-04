@@ -17,6 +17,9 @@ set -e
 # Enable archzfs repository.
 pacman-key --keyserver keyserver.ubuntu.com --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
+
+sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDownloads
+
 #-------------------------------------------------------------------------------
 cat >> /etc/pacman.conf << 'EOF'
 [archzfs]
@@ -32,7 +35,7 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
 # Install packages.
 system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
-toolsCli='sudo zsh tmux nano gdisk man-db'
+toolsCli='sudo zsh tmux nano rsync gdisk man-db'
 developmentTools='mercurial git aws-cli openssh'
 pacman --noconfirm -Sy ${system} ${toolsCli} ${developmentTools}
 
@@ -260,18 +263,16 @@ EOF
 
 # Mount SMB shares.
 ####################################################################################################
-# Mount SMB shares.
 #-------------------------------------------------------------------------------
-cat > /etc/systemd/system/mnt-truenas-marcelotsvaz.mount << 'EOF'
+cat > /etc/systemd/system/mnt-truenas-home.mount << 'EOF'
 [Unit]
 Description = Mount SMB shares
 
 [Mount]
 What = //truenas.lan/marcelotsvaz
-Where = /mnt/truenas/marcelotsvaz
+Where = /mnt/truenas/home
 Type = cifs
-Options = credentials=/etc/samba/credentials/truenas
-TimeoutSec = 30
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
 
 [Install]
 WantedBy = multi-user.target
@@ -285,15 +286,14 @@ Description = Mount SMB shares
 What = //truenas.lan/media
 Where = /mnt/truenas/media
 Type = cifs
-Options = credentials=/etc/samba/credentials/truenas
-TimeoutSec = 30
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
 
 [Install]
 WantedBy = multi-user.target
 EOF
 #-------------------------------------------------------------------------------
 
-systemctl enable mnt-truenas-marcelotsvaz.mount mnt-truenas-media.mount
+systemctl enable mnt-truenas-home.mount mnt-truenas-media.mount
 
 mkdir -p /etc/samba/credentials
 chmod 700 /etc/samba/credentials
