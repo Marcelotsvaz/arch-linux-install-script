@@ -14,7 +14,7 @@ set -e
 
 # Desktop enviroment.
 ####################################################################################################
-desktopEnvironment='plasma-desktop phonon-qt5-vlc ttf-liberation sddm'
+desktopEnvironment='plasma-desktop phonon-qt5-vlc ttf-liberation ttf-cascadia-code sddm'
 applets='kscreen kmix kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin ark spectacle'
 # khotkeys browser integration

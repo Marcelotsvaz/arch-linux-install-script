@@ -28,7 +28,12 @@ Wine:
 
 
 
-
+Fonts:
+	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
+	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
+	adobe-source-sans-fonts ttf-cascadia-code otf-ipafont ttf-liberation
+	/deploy/aur.sh noto-fonts-lite
+	--assume-installed noto-fonts
 
 
 Slow animations:
