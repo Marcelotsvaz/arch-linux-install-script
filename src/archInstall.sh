@@ -48,15 +48,15 @@ efiPartition='/dev/disk/by-partuuid/58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 # sgdisk --new 1:0:+1M --change-name 1:'Boot' --typecode 1:ef02 ${disk}
 # sgdisk --new 2:0:0 --change-name 2:'Root' ${disk}
 
-
 # ZFS datasets layout:
+# 
 # rootPool
-# 	root
-# 		default
-# 		recovery
-# 	data
-# 		home
-# 	swap
+# ├── root
+# │   ├── default
+# │   └── recovery
+# ├── data
+# │   └── home
+# └── swap
 
 zpool create			\
 	-o ashift=13		\
