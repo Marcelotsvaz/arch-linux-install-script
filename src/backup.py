@@ -35,15 +35,15 @@ folders = {
 		'krunnerrc',
 		'kservicemenurc',
 		
-		'Wallpaper.png',
-		
-		# GTK.
+		# Other.
 		# 'gtk-4.0/settings.ini',
-		
-		# xsettingsd
+		# 'xsettingsd',
 		
 		# VSCode.
 		'Code - OSS/User/settings.json',
+		
+		# Custom files.
+		'Wallpaper.png',
 	],
 	
 	'home/marcelotsvaz/.local': [
@@ -64,15 +64,14 @@ dest = sys.argv[2]
 
 for folder, files in folders.items():
 	for file in files:
-		fullFiles.append( f'{src}/{folder}/{file}' )
+		fullFiles.append( f'{src}/./{folder}/{file}' )
 
 args = [
 	'rsync',
 	'--ignore-missing-args',
 	'-aRv',
-	# '--fake-super',
-	# '--no-o',
-	# '--no-g',
+	'--no-o',
+	'--no-g',
 ] + fullFiles + [ dest ]
 
 run( args )

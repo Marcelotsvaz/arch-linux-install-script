@@ -34,6 +34,7 @@ Fonts:
 	adobe-source-sans-fonts ttf-cascadia-code otf-ipafont ttf-liberation
 	/deploy/aur.sh noto-fonts-lite
 	--assume-installed noto-fonts
+	https://www.nerdfonts.com/
 
 
 Slow animations:

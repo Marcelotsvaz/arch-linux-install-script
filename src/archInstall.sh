@@ -135,6 +135,7 @@ rm -r ${mountPoint}/deploy
 mkdir -p ${backupDir}
 mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=$(dirname "$0")/../credentials,cifsacl
 $(dirname "$0")/backup.py ${backupDir}/Backups/Linux ${mountPoint}
+chown -R 1000: ${mountPoint}/home/marcelotsvaz
 umount ${backupDir}
 
 
