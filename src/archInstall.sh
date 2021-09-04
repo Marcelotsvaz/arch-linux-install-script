@@ -13,7 +13,7 @@ set -e
 
 
 # Prepare installer.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDownloads
 
 reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
@@ -27,7 +27,7 @@ modprobe zfs
 
 
 # Variables.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 mountPoint='/mnt/new'
 backupDir='/mnt/truenas/home'
 # diskSerial='S1AXNSAD703273K'
@@ -35,7 +35,7 @@ backupDir='/mnt/truenas/home'
 
 
 # Partitioning and filesystem.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 # disk=$(lsblk -nro PATH,SERIAL | grep ${diskSerial} | cut -d ' ' -f1)
 targetDevice='/dev/disk/by-partuuid/bcde2fd2-2edb-4f31-b875-6c475a0cae7e'
 
@@ -115,13 +115,13 @@ mount ${efiPartition} ${mountPoint}/boot/efi
 
 
 # Install Arch Linux.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 pacstrap -c ${mountPoint} base
 
 
 
 # Chroot.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 mkdir ${mountPoint}/deploy
 cp $(dirname "$0")/* ${mountPoint}/deploy/
 arch-chroot ${mountPoint} /deploy/archSetup1.sh
@@ -131,7 +131,7 @@ rm -r ${mountPoint}/deploy
 
 
 # Restore configuration.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 mkdir -p ${backupDir}
 mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=$(dirname "$0")/../credentials,cifsacl
 $(dirname "$0")/backup.py ${backupDir}/Backups/Linux ${mountPoint}
@@ -140,7 +140,7 @@ umount ${backupDir}
 
 
 # Cleanup.
-####################################################################################################
+#---------------------------------------------------------------------------------------------------
 # Can't do it inside chroot.
 ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf
 
