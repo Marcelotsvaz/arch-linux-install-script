@@ -35,9 +35,10 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
 # Install packages.
 system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
-toolsCli='sudo zsh tmux nano rsync gdisk man-db'
+shell='fish exa tmux'
+tools='sudo nano rsync gdisk man-db'
 developmentTools='mercurial git aws-cli openssh'
-pacman --noconfirm -Sy ${system} ${toolsCli} ${developmentTools}
+pacman --noconfirm -Sy ${system} ${shell} ${tools} ${developmentTools}
 
 
 # Install AUR packages.
@@ -190,11 +191,9 @@ systemctl enable boot-efi.mount
 # Custom configuration.
 #---------------------------------------------------------------------------------------------------
 # Users.
-mkdir -m 700 /etc/skel/.ssh
-touch /etc/skel/.ssh/authorized_keys
 rm /etc/skel/.bash*
 
-useradd -mG wheel -c 'Marcelo Vaz' marcelotsvaz
+useradd -m -s '/usr/bin/fish' -c 'Marcelo Vaz' -G wheel marcelotsvaz
 passwd -d marcelotsvaz
 
 
@@ -203,7 +202,7 @@ echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel
 
 
 # OpenSSL.
-sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
+sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
 #-------------------------------------------------------------------------------
 cat > /etc/ssl/custom.cnf << 'EOF'
 # Custom configuration.
@@ -243,23 +242,6 @@ EOF
 systemctl enable sshd
 
 
-# Bash.
-#-------------------------------------------------------------------------------
-cat >> /etc/bash.bashrc << 'EOF'
-
-
-# Custom configuration.
-green='\[\e[0;32m\]'
-blue='\[\e[1;34m\]'
-reset='\[\e[m\]'
-PS1="[\A][${green}\u@\h ${blue}\w${reset}]\$ "
-
-alias grep='grep --color=auto'
-alias ls='ls --color=auto'
-EOF
-#-------------------------------------------------------------------------------
-
-
 
 # Mount SMB shares.
 #---------------------------------------------------------------------------------------------------
@@ -292,7 +274,6 @@ Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcel
 WantedBy = multi-user.target
 EOF
 #-------------------------------------------------------------------------------
-
 systemctl enable mnt-truenas-home.mount mnt-truenas-media.mount
 
 mkdir -p /etc/samba/credentials

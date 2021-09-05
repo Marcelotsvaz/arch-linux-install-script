@@ -14,26 +14,31 @@ from subprocess import run
 
 folders = {
 	'home/marcelotsvaz/.config': [
+		# Fish.
+		'fish/functions/fish_prompt.fish',
+		'fish/functions/exa.fish',
+		'fish/fish_variables',
+		
 		# KDE.
-		'menus/*',
-		'plasmashellrc',
-		'plasma-org.kde.plasma.desktop-appletsrc',
-		'kdeglobals',	# Fonts.
-		'plasmarc',
-		'kwinrc',
-		'kiorc',
-		'kscreenlockerrc',
-		'kglobalshortcutsrc',
-		'kmixrc',
-		'konsolerc',
-		'klaunchrc',
-		'kcminputrc',
-		'kxkbrc',
-		'ksmserverrc',
-		'ksplashrc',
-		'kwinrulesrc',
-		'krunnerrc',
-		'kservicemenurc',
+		# 'menus/*',
+		# 'plasmashellrc',
+		# 'plasma-org.kde.plasma.desktop-appletsrc',
+		# 'kdeglobals',	# Fonts.
+		# 'plasmarc',
+		# 'kwinrc',
+		# 'kiorc',
+		# 'kscreenlockerrc',
+		# 'kglobalshortcutsrc',
+		# 'kmixrc',
+		# 'konsolerc',
+		# 'klaunchrc',
+		# 'kcminputrc',
+		# 'kxkbrc',
+		# 'ksmserverrc',
+		# 'ksplashrc',
+		# 'kwinrulesrc',
+		# 'krunnerrc',
+		# 'kservicemenurc',
 		
 		# Other.
 		# 'gtk-4.0/settings.ini',
@@ -46,15 +51,15 @@ folders = {
 		'Wallpaper.png',
 	],
 	
-	'home/marcelotsvaz/.local': [
-		# KDE.
-		'share/plasma-systemmonitor/overview.page',
-	],
+	# 'home/marcelotsvaz/.local': [
+	# 	# KDE.
+	# 	'share/plasma-systemmonitor/overview.page',
+	# ],
 	
-	'': [
-		# SDDM.
-		'etc/sddm.conf.d/kde_settings.conf',
-	],
+	# '': [
+	# 	# SDDM.
+	# 	'etc/sddm.conf.d/kde_settings.conf',
+	# ],
 }
 
 fullFiles = []

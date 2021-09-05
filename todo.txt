@@ -4,7 +4,6 @@ ZFS
 random.trust_cpu=on
 Noto bloat
 Secure boot
-ZSH
 UEFI Hacking
 VAZnet CA
 	sudo trust anchor certificate.pem
@@ -25,8 +24,9 @@ Wine:
 	Affinity Photo
 	Affinity Designer
 
-
-
+Tools:
+	ripgrep
+	zoxide
 
 Fonts:
 	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
