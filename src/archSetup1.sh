@@ -134,17 +134,16 @@ for kernel in vmlinuz-*; do
 	pkgbase=${kernel#vmlinuz-}
 	
 	cat $(compgen -G *-ucode.img) initramfs-${pkgbase}.img > unified-initramfs-${pkgbase}.img
-	echo ${kernelParameters} > cmdline
 	objcopy																											\
 		--change-section-vma .osrel=0x20000		--add-section .osrel='/usr/lib/os-release'							\
-		--change-section-vma .cmdline=0x30000	--add-section .cmdline='cmdline'									\
+		--change-section-vma .cmdline=0x30000	--add-section .cmdline=<(echo ${kernelParameters})					\
 		--change-section-vma .splash=0x40000	--add-section .splash='/usr/share/systemd/bootctl/splash-arch.bmp'	\
 		--change-section-vma .linux=0x2000000	--add-section .linux="vmlinuz-${pkgbase}"							\
 		--change-section-vma .initrd=0x3000000	--add-section .initrd="unified-initramfs-${pkgbase}.img"			\
 		'/usr/lib/systemd/boot/efi/linuxx64.efi.stub'																\
 		"efi/${pkgbase}.efi"
 	
-	rm unified-initramfs-${pkgbase}.img cmdline
+	rm unified-initramfs-${pkgbase}.img
 done
 EOF
 #-------------------------------------------------------------------------------
