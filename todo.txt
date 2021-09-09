@@ -1,6 +1,7 @@
 ZFS
 	Encryption
 	hostid
+	Boot into backup snapshot
 random.trust_cpu=on
 Noto bloat
 Secure boot

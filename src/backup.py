@@ -41,6 +41,7 @@ folders = {
 		'kxkbrc',									# Keyboard layout.
 		'kiorc',									# Trash confirmations.
 		'menus/applications-kmenuedit.menu',		# Applications menu.
+		'kactivitymanagerdrc',						# Activities.
 		'kactivitymanagerd-statsrc',				# Launcher favorites.
 		# 'kmixrc',
 		# 'kglobalshortcutsrc',
@@ -70,6 +71,7 @@ folders = {
 	f'home/{user}/.local/share': [
 		# KDE.
 		'plasma-systemmonitor/overview.page',
+		'kscreen/',								# Screen layout.
 	],
 	
 	'': [
