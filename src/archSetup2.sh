@@ -12,36 +12,36 @@ set -e
 
 
 
-# Desktop enviroment.
+# Install software.
 #---------------------------------------------------------------------------------------------------
-desktopEnvironment='plasma-desktop phonon-qt5-vlc ttf-liberation ttf-cascadia-code sddm'
-applets='kscreen kmix kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
+# Desktop enviroment.
+desktopEnvironment='plasma-desktop phonon-qt5-vlc sddm'
+applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
+fonts='ttf-liberation ttf-cascadia-code'
 applications='dolphin ark spectacle'
-# khotkeys browser integration
-pacman --noconfirm -S ${desktopEnvironment} ${applets} ${applications}
+
+# Main applications.
+everydaySoftware='firefox thunderbird keepassxc discord vlc'
+developmentSoftware='konsole code'
+misc='neofetch'
+
+pacman --noconfirm -S											\
+	${desktopEnvironment} ${applets} ${fonts} ${applications}	\
+	${everydaySoftware} ${developmentSoftware} ${misc}
 
 systemctl enable sddm
 
 
 
-# Main applications.
-#---------------------------------------------------------------------------------------------------
-everydaySoftware='firefox thunderbird vlc discord keepassxc'
-developmentSoftware='konsole code'
-misc='neofetch'
-pacman --noconfirm -S ${everydaySoftware} ${developmentSoftware} ${misc}
-
-
-
 # Games.
 #---------------------------------------------------------------------------------------------------
-gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
-games='steam'
+# gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
+# games='steam'
 
-# Enable multilib repository.
-perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
+# # Enable multilib repository.
+# perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
 
-pacman --noconfirm -Sy ${gpuDrivers} ${games}
+# pacman --noconfirm -Sy ${gpuDrivers} ${games}
 
 
 

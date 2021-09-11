@@ -6,9 +6,12 @@ random.trust_cpu=on
 Noto bloat
 Secure boot
 UEFI Hacking
+Hora
 VAZnet CA
 	sudo trust anchor certificate.pem
 Thunderbird config
+
+# khotkeys browser integration
 
 Native apps:
 	Music player
