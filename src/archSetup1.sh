@@ -14,14 +14,20 @@ set -e
 
 # Install packages.
 #---------------------------------------------------------------------------------------------------
-# Enable archzfs repository.
-pacman-key --keyserver keyserver.ubuntu.com --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
+# Sign archzfs keys.
+pacman-key --recv-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 
-sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDownloads
 
+# Pacman configuration.
 #-------------------------------------------------------------------------------
 cat >> /etc/pacman.conf << 'EOF'
+
+# Custom config.
+[options]
+ParallelDownloads = 5
+Color
+
 [archzfs]
 Server = https://archzfs.com/$repo/$arch
 EOF
@@ -38,7 +44,8 @@ system='linux-lts linux-firmware intel-ucode base-devel linux-lts-headers mkinit
 shell='fish exa tmux'
 tools='sudo nano rsync gdisk man-db'
 developmentTools='mercurial git aws-cli openssh'
-pacman --noconfirm -Sy ${system} ${shell} ${tools} ${developmentTools}
+
+pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}
 
 
 # Install AUR packages.

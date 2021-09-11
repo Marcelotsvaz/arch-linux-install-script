@@ -18,8 +18,8 @@ sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDown
 
 reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
-curl -O http://archzfs.com/archive_archzfs/zfs-linux-2.0.5_5.12.13.arch1.2-1-x86_64.pkg.tar.zst
-curl -O http://archzfs.com/archive_archzfs/zfs-utils-2.0.5-1-x86_64.pkg.tar.zst
+curl -O# http://archzfs.com/archive_archzfs/zfs-linux-2.0.5_5.12.13.arch1.2-1-x86_64.pkg.tar.zst
+curl -O# http://archzfs.com/archive_archzfs/zfs-utils-2.0.5-1-x86_64.pkg.tar.zst
 pacman --noconfirm -U zfs-{linux,utils}-*.pkg.tar.zst
 
 modprobe zfs
@@ -105,6 +105,7 @@ zfs create					\
 # swapon /dev/zvol/rootPool/swap
 
 
+# Set boot dataset.
 zpool set bootfs=rootPool/root/default rootPool
 
 
