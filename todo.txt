@@ -3,7 +3,6 @@ ZFS
 	hostid
 	Boot into backup snapshot
 random.trust_cpu=on
-UEFI entries
 Noto bloat
 Secure boot
 UEFI Hacking

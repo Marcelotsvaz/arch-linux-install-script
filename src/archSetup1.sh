@@ -123,9 +123,6 @@ systemctl enable systemd-{networkd,resolved,timesyncd}
 
 # Boot.
 #---------------------------------------------------------------------------------------------------
-efiPartUuid='58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
-
-
 # Configure mkinitcpio.
 sed -Ei 's/^HOOKS=.*/HOOKS=(base zfs modconf numlock)/'	/etc/mkinitcpio.conf	# Add zfs to HOOKS and remove unneeded stuff.
 sed -Ei 's/^MODULES=.*/MODULES=(zfs)/'					/etc/mkinitcpio.conf	# Add zfs to MODULES.
@@ -133,6 +130,7 @@ sed -Ei 's/^PRESETS=.*/PRESETS=(default)/'				/usr/share/mkinitcpio/hook.preset	
 
 
 rm /etc/pacman.d/hooks/90-mkinitcpio-install.hook	# Remove symlink to /dev/null.
+
 #-------------------------------------------------------------------------------
 cat > /etc/pacman.d/hooks/90-mkinitcpio-install.hook << 'EOF'
 [Trigger]
@@ -167,47 +165,49 @@ cd /boot
 for kernel in vmlinuz-*; do
 	pkgbase=${kernel#vmlinuz-}
 	
-	cat $(compgen -G *-ucode.img) initramfs-${pkgbase}.img > unified-initramfs-${pkgbase}.img
-	objcopy																											\
-		--change-section-vma .osrel=0x20000		--add-section .osrel='/usr/lib/os-release'							\
-		--change-section-vma .cmdline=0x30000	--add-section .cmdline=<(echo ${kernelParameters})					\
-		--change-section-vma .splash=0x40000	--add-section .splash='/usr/share/systemd/bootctl/splash-arch.bmp'	\
-		--change-section-vma .linux=0x2000000	--add-section .linux="vmlinuz-${pkgbase}"							\
-		--change-section-vma .initrd=0x3000000	--add-section .initrd="unified-initramfs-${pkgbase}.img"			\
-		'/usr/lib/systemd/boot/efi/linuxx64.efi.stub'																\
+	# Unified image.
+	objcopy																														\
+		--change-section-vma .osrel=0x20000		--add-section .osrel='/usr/lib/os-release'										\
+		--change-section-vma .cmdline=0x30000	--add-section .cmdline=<(echo ${kernelParameters})								\
+		--change-section-vma .splash=0x40000	--add-section .splash='/usr/share/systemd/bootctl/splash-arch.bmp'				\
+		--change-section-vma .linux=0x2000000	--add-section .linux="vmlinuz-${pkgbase}"										\
+		--change-section-vma .initrd=0x3000000	--add-section .initrd=<(cat $(compgen -G *-ucode.img) initramfs-${pkgbase}.img)	\
+		'/usr/lib/systemd/boot/efi/linuxx64.efi.stub'																			\
 		"efi/${pkgbase}.efi"
 	
-	rm unified-initramfs-${pkgbase}.img
+	# UEFI boot entry.
+	efiPartition="/dev/disk/by-partuuid/$(lsblk -nro PARTUUID,MOUNTPOINTS | grep ' /boot/efi$' | cut -d ' ' -f1)"
+	
+	if [[ ${pkgbase} != 'linux.efi' ]]; then
+		variant=" (${pkgbase#linux-})"
+	fi
+	
+	efibootmgr							\
+		--create						\
+		--disk "${efiPartition}"		\
+		--label "Arch Linux${variant}"	\
+		--loader "/${pkgbase}.efi"
 done
 EOF
 #-------------------------------------------------------------------------------
 chmod +x /usr/local/share/libalpm/scripts/mkinitcpio-install-unified
 
 
-# Install kernel.
+# Install the kernel.
 pacman --noconfirm -S linux-lts zfs-dkms
 systemctl enable zfs-mount zfs.target
 
 
-# UEFI boot entry.
-cd /boot/efi
-for kernel in *.efi; do
-	efibootmgr										\
-	--create										\
-	--disk "/dev/disk/by-partuuid/${efiPartUuid}"	\
-	--label 'Arch Linux'							\
-	--loader "/${kernel}"
-done
-
 
 # Mount EFI partition on boot.
+efiPartition="/dev/disk/by-partuuid/$(lsblk -nro PARTUUID,MOUNTPOINTS | grep ' /boot/efi$' | cut -d ' ' -f1)"
 #-------------------------------------------------------------------------------
 cat > /etc/systemd/system/boot-efi.mount << EOF
 [Unit]
 Description = Mount EFI partition
 
 [Mount]
-What = /dev/disk/by-partuuid/${efiPartUuid}
+What = ${efiPartition}
 Where = /boot/efi
 Type = vfat
 Options = rw
