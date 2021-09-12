@@ -16,19 +16,23 @@ set -e
 #---------------------------------------------------------------------------------------------------
 # Desktop enviroment.
 desktopEnvironment='plasma-desktop phonon-qt5-vlc sddm'
-applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
 fonts='ttf-liberation ttf-cascadia-code'
-applications='dolphin ark spectacle'
+audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
+applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
+applications='dolphin ark spectacle qjackctl'
 
 # Main applications.
 everydaySoftware='firefox thunderbird keepassxc discord vlc'
 developmentSoftware='konsole code'
 misc='neofetch'
 
-pacman --noconfirm -S											\
-	${desktopEnvironment} ${applets} ${fonts} ${applications}	\
+pacman --noconfirm -S													\
+	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
+	
+sudo -u marcelotsvaz yay -S pipewire-jack-dropin
 
+systemctl --global enable pipewire-pulse
 systemctl enable sddm
 
 

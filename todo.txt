@@ -11,6 +11,8 @@ VAZnet CA
 	sudo trust anchor certificate.pem
 Thunderbird config
 Browser integration
+Avatar
+Flatpak
 
 Native apps:
 	Music player
