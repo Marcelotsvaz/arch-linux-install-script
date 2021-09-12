@@ -12,6 +12,24 @@ set -e
 
 
 
+# Add users.
+#---------------------------------------------------------------------------------------------------
+# Remove bash stuff.
+rm /etc/skel/.bash*
+
+# Change root shell.
+usermod -s '/usr/bin/fish' root
+
+# Add user marcelotsvaz with no password.
+useradd -m -s '/usr/bin/fish' -c 'Marcelo Vaz' -G wheel marcelotsvaz
+passwd -d marcelotsvaz
+
+# Add wheel to sudoers.
+mkdir -m 750 /etc/sudoers.d
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel
+
+
+
 # Install packages.
 #---------------------------------------------------------------------------------------------------
 # Sign archzfs keys.
@@ -48,8 +66,17 @@ developmentTools='mercurial git aws-cli openssh'
 pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}
 
 
+# Install yay.
+sudo -u marcelotsvaz bash << 'EOF'
+package='yay'
+git clone https://aur.archlinux.org/${package}.git /tmp/${package}
+( cd /tmp/${package} && makepkg --syncdeps --install --noconfirm )
+rm -r /tmp/${package}
+EOF
+
+
 # Install AUR packages.
-/deploy/aur.sh mkinitcpio-numlock
+sudo -u marcelotsvaz yay -S mkinitcpio-numlock
 
 
 
@@ -196,17 +223,6 @@ systemctl enable boot-efi.mount
 
 # Custom configuration.
 #---------------------------------------------------------------------------------------------------
-# Users.
-rm /etc/skel/.bash*
-
-useradd -m -s '/usr/bin/fish' -c 'Marcelo Vaz' -G wheel marcelotsvaz
-passwd -d marcelotsvaz
-
-
-# Sudo.
-echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel
-
-
 # OpenSSL.
 sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
 #-------------------------------------------------------------------------------
@@ -282,8 +298,6 @@ EOF
 #-------------------------------------------------------------------------------
 systemctl enable mnt-truenas-home.mount mnt-truenas-media.mount
 
-mkdir -p /etc/samba/credentials
-chmod 700 /etc/samba/credentials
+mkdir -pm 700 /etc/samba/credentials
 
-touch /etc/samba/credentials/truenas
-chmod 600 /etc/samba/credentials/truenas
+touch /etc/samba/credentials/truenas && chmod 600 ${_}
