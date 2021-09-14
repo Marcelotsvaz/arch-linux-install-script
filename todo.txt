@@ -1,7 +1,6 @@
 ZFS
 	Encryption
 	Boot into backup snapshot
-Noto bloat
 Secure boot
 UEFI Hacking
 VAZnet CA
@@ -30,6 +29,7 @@ Tools:
 https://github.com/fish-shell/fish-shell/issues/7485
 
 Fonts:
+	Noto bloat
 	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
 	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
 	adobe-source-sans-fonts ttf-cascadia-code otf-ipafont ttf-liberation

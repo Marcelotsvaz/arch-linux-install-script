@@ -106,15 +106,15 @@ mount ${efiPartition} ${mountPoint}/boot/efi
 #---------------------------------------------------------------------------------------------------
 pacstrap -c ${mountPoint} base
 
-
-
-# Chroot.
-#---------------------------------------------------------------------------------------------------
+# chroot.
 mkdir ${mountPoint}/deploy
 cp $(dirname "$0")/* ${mountPoint}/deploy/
 arch-chroot ${mountPoint} /deploy/archSetup1.sh
 arch-chroot ${mountPoint} /deploy/archSetup2.sh
 rm -r ${mountPoint}/deploy
+
+# Can't do it inside chroot.
+ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf
 
 
 
@@ -126,13 +126,13 @@ $(dirname "$0")/backup.py ${backupDir}/Backups/Linux ${mountPoint}
 chown -R 1000:1000 ${mountPoint}/home/marcelotsvaz
 umount ${backupDir}
 
+# Create snapshot.
+zfs snapshot -r rootPool@initial
+
 
 
 # Cleanup.
 #---------------------------------------------------------------------------------------------------
-# Can't do it inside chroot.
-ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf
-
 umount ${efiPartition}
 zpool export rootPool
 rm -r ${mountPoint}
