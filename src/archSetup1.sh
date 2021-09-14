@@ -159,7 +159,7 @@ mkdir -p /usr/local/share/libalpm/scripts
 #-------------------------------------------------------------------------------
 cat > /usr/local/share/libalpm/scripts/mkinitcpio-install-unified << 'EOF'
 #!/bin/bash
-kernelParameters='zfs=rootPool/root/default rw quiet udev.log_level=3'
+kernelParameters='zfs=rootPool/root rw quiet udev.log_level=3'
 
 cd /boot
 for kernel in vmlinuz-*; do
@@ -210,7 +210,6 @@ Description = Mount EFI partition
 What = ${efiPartition}
 Where = /boot/efi
 Type = vfat
-Options = rw
 
 [Install]
 WantedBy = multi-user.target
@@ -296,7 +295,21 @@ Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcel
 WantedBy = multi-user.target
 EOF
 #-------------------------------------------------------------------------------
-systemctl enable mnt-truenas-home.mount mnt-truenas-media.mount
+cat > /etc/systemd/system/mnt-truenas-backups.mount << 'EOF'
+[Unit]
+Description = Mount SMB shares
+
+[Mount]
+What = //truenas.lan/Backup
+Where = /mnt/truenas/backups
+Type = cifs
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
+systemctl enable mnt-truenas-home.mount mnt-truenas-media.mount mnt-truenas-backups.mount
 
 mkdir -pm 700 /etc/samba/credentials
 

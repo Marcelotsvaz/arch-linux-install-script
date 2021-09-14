@@ -75,8 +75,8 @@ folders = {
 	],
 	
 	'': [
-		# SDDM.
-		'etc/sddm.conf.d/kde_settings.conf',
+		'etc/sddm.conf.d/kde_settings.conf',	# SDDM.
+		'var/lib/AccountsService/',				# User avatar and email.
 	],
 }
 

@@ -52,10 +52,8 @@ efiPartition='/dev/disk/by-partuuid/58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 # 
 # rootPool
 # ├── root
-# │   ├── default
-# │   └── recovery
-# ├── data
-# │   └── home
+# ├── home
+# ├── games
 # └── swap
 
 zpool create			\
@@ -63,9 +61,8 @@ zpool create			\
 	-o autotrim=on		\
 	-O xattr=sa			\
 	-O acltype=posixacl	\
-	-O compression=lz4	\
-	-O mountpoint=/		\
-	-O canmount=off		\
+	-O compression=zstd	\
+	-O mountpoint=none	\
 	-R ${mountPoint}	\
 	-f					\
 	rootPool			\
@@ -73,28 +70,18 @@ zpool create			\
 
 
 # Root datasets.
-zfs create					\
-	-o mountpoint=none		\
-	-o canmount=off			\
+zfs create							\
+	-o mountpoint=/					\
 	rootPool/root
 
-zfs create					\
-	-o mountpoint=/			\
-	rootPool/root/default
-
-zfs create					\
-	-o mountpoint=none		\
-	rootPool/root/recovery
-
-
 # Data datasets.
-zfs create					\
-	-o mountpoint=/			\
-	-o canmount=off			\
-	rootPool/data
+zfs create							\
+	-o mountpoint=/home				\
+	rootPool/home
 
-zfs create					\
-	rootPool/data/home
+zfs create							\
+	-o mountpoint=/usr/local/games	\
+	rootPool/games
 
 
 # zfs create					\
@@ -106,7 +93,7 @@ zfs create					\
 
 
 # Set boot dataset.
-zpool set bootfs=rootPool/root/default rootPool
+zpool set bootfs=rootPool/root rootPool
 
 
 # Mount the EFI partiton on /boot folder of the new root.

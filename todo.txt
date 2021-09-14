@@ -6,17 +6,14 @@ random.trust_cpu=on
 Noto bloat
 Secure boot
 UEFI Hacking
+SMB share wanted-by
 VAZnet CA
 	sudo trust anchor certificate.pem
 Thunderbird config
-Browser integration
-Avatar
-Flatpak
+mesa vulkan-radeon
 
 Native apps:
-	Music player
 	PDF viewer
-	Image viewer
 	LibreOffice
 	iV Cam
 	Minecraft
@@ -31,6 +28,8 @@ Wine:
 Tools:
 	ripgrep
 	zoxide
+
+https://github.com/fish-shell/fish-shell/issues/7485
 
 Fonts:
 	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -53,3 +52,9 @@ Slow animations:
 	https://github.com/Prayag2/konsave/blob/master/konsave/conf_kde.yaml
 	https://github.com/rubenaleman/kde-plasma-backup/blob/master/kde-plasma-backup.sh
 	https://old.reddit.com/r/kde/comments/654dwo/how_can_i_make_my_kde_configs_portable/
+
+
+ZFS Compression:
+	None: 13:09s 9.67G
+	lz4: R1.77x
+	zstad 13:45s 5.38G R1.91x

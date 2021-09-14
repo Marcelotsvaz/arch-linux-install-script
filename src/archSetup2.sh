@@ -18,11 +18,11 @@ set -e
 desktopEnvironment='plasma-desktop phonon-qt5-vlc sddm'
 fonts='ttf-liberation ttf-cascadia-code'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
-applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm drkonqi kde-gtk-config breeze-gtk'
-applications='dolphin ark spectacle qjackctl'
+applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm plasma-browser-integration drkonqi kde-gtk-config breeze-gtk'
+applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
-everydaySoftware='firefox thunderbird keepassxc discord vlc'
+everydaySoftware='firefox thunderbird keepassxc rhythmbox discord vlc flatpak'
 developmentSoftware='konsole code'
 misc='neofetch'
 
@@ -39,18 +39,39 @@ systemctl enable sddm
 
 # Games.
 #---------------------------------------------------------------------------------------------------
-# gpuDrivers='mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon'
-# games='steam'
+gamesFolder='/usr/local/games'
+setfacl -m u:marcelotsvaz:rwx ${gamesFolder}
 
-# # Enable multilib repository.
-# perl -0777 -pi -e 's/#(\[multilib\]\n)#(Include = \/etc\/pacman.d\/mirrorlist)/\1\2/' /etc/pacman.conf
+# Bind-mount games folder outside /usr so flatpak apps can access it.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/opt-games.mount << EOF
+[Unit]
+Description = Mount games folder for flatpak access
 
-# pacman --noconfirm -Sy ${gpuDrivers} ${games}
+[Mount]
+What = ${gamesFolder}
+Where = /opt/games
+Type = none
+Options = bind
+
+[Install]
+WantedBy = multi-user.target
+EOF
+#-------------------------------------------------------------------------------
+systemctl enable opt-games.mount
+
+# Install Steam.
+flatpak install --assumeyes com.valvesoftware.Steam
+flatpak override --filesystem=/opt/games/steam:create com.valvesoftware.Steam
 
 
 
 # Configure software.
 #---------------------------------------------------------------------------------------------------
+# Temporally fix for SDDM not sourcing /etc/profile when fish is set as the login shell.
+sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/wayland-session
+sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/Xsession
+
 # Enable Microsoft VSCode marketplace.
 sed -Ei 's/("serviceUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery",/' /usr/lib/code/product.json
 sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\t\t"cacheUrl": "https:\/\/vscode.blob.core.windows.net\/gallery\/index"/' /usr/lib/code/product.json
