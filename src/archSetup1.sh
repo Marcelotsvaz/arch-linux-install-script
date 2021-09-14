@@ -266,9 +266,11 @@ systemctl enable sshd
 
 # Mount SMB shares.
 #---------------------------------------------------------------------------------------------------
+# truenas.lan shares.
 #-------------------------------------------------------------------------------
 cat > /etc/systemd/system/mnt-truenas-home.mount << 'EOF'
 [Unit]
+After = nss-lookup.target
 Description = Mount SMB shares
 
 [Mount]
@@ -283,6 +285,7 @@ EOF
 #-------------------------------------------------------------------------------
 cat > /etc/systemd/system/mnt-truenas-media.mount << 'EOF'
 [Unit]
+After = nss-lookup.target
 Description = Mount SMB shares
 
 [Mount]
@@ -297,6 +300,7 @@ EOF
 #-------------------------------------------------------------------------------
 cat > /etc/systemd/system/mnt-truenas-backups.mount << 'EOF'
 [Unit]
+After = nss-lookup.target
 Description = Mount SMB shares
 
 [Mount]
