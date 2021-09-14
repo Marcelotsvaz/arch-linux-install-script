@@ -68,7 +68,7 @@ pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}
 
 # Install yay.
 sudo -u marcelotsvaz bash << 'EOF'
-package='yay'
+package='yay-bin'
 git clone https://aur.archlinux.org/${package}.git /tmp/${package}
 ( cd /tmp/${package} && makepkg --syncdeps --install --noconfirm )
 rm -r /tmp/${package}
