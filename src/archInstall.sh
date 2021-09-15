@@ -101,11 +101,8 @@ mount ${efiPartition} ${mountPoint}/boot/efi
 pacstrap -c ${mountPoint} base
 
 # chroot.
-mkdir ${mountPoint}/deploy
-cp $(dirname "$0")/* ${mountPoint}/deploy/
-arch-chroot ${mountPoint} /deploy/archSetup1.sh
-arch-chroot ${mountPoint} /deploy/archSetup2.sh
-rm -r ${mountPoint}/deploy
+arch-chroot ${mountPoint} bash -c "$(cat $(dirname "$0")/archSetup1.sh)"
+arch-chroot ${mountPoint} bash -c "$(cat $(dirname "$0")/archSetup2.sh)"
 
 # Can't do it inside chroot.
 ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf

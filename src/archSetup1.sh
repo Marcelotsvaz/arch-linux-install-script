@@ -106,7 +106,7 @@ EOF
 
 
 # Network.
-echo 'vaz-pc' > /etc/hostname
+echo 'vaz-pc.lan' > /etc/hostname
 
 #-------------------------------------------------------------------------------
 cat > /etc/systemd/network/main.network << 'EOF'
