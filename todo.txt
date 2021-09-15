@@ -4,7 +4,6 @@ Secure boot
 Thunderbird config
 mesa vulkan-radeon
 UEFI Hacking
-Echo script to bash in chroot
 
 Native apps:
 	PDF viewer

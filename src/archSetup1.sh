@@ -224,7 +224,7 @@ systemctl enable boot-efi.mount
 #---------------------------------------------------------------------------------------------------
 # Unlock home dataset on login.
 #-------------------------------------------------------------------------------
-cat > /usr/local/bin/unlockHomeDataset.sh << 'EOF'
+cat > /usr/local/lib/unlockHomeDataset << 'EOF'
 #!/usr/bin/bash
 
 # Abort on error.
@@ -239,9 +239,9 @@ if [[ $( zfs get -Ho value mounted ${dataset} ) == no ]]; then
 fi
 EOF
 #-------------------------------------------------------------------------------
-chmod +x /usr/local/bin/unlockHomeDataset.sh
+chmod +x /usr/local/lib/unlockHomeDataset
 
-echo 'auth       required                    pam_exec.so          expose_authtok /usr/local/bin/unlockHomeDataset.sh' >> /etc/pam.d/system-auth
+echo 'auth       required                    pam_exec.so          expose_authtok /usr/local/lib/unlockHomeDataset' >> /etc/pam.d/system-auth
 
 
 # OpenSSL.
