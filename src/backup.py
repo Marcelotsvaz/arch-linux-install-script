@@ -15,13 +15,30 @@ from subprocess import run
 user = 'marcelotsvaz'
 
 folders = {
+	f'home/{user}': [
+		'.passwords.kdbx',							# KeePassXC database.
+	],
+	
 	f'home/{user}/.config': [
+		# Applications.
+		'dolphinrc',
+		'konsolerc',
+		'gwenviewrc',
+		'krunnerrc',
+		'keepassxc/keepassxc.ini',
+		
 		# Fish.
+		'fish/fish_variables',
 		'fish/functions/fish_prompt.fish',
 		'fish/functions/l.fish',
 		'fish/functions/ll.fish',
 		'fish/functions/la.fish',
-		'fish/fish_variables',
+		
+		# VSCode.
+		'Code - OSS/User/settings.json',
+		
+		# Custom files.
+		'Wallpaper.png',							# Desktop, lockscreen and SDDM wallpaper.
 		
 		# KDE.
 		'plasmashellrc',							# Screen connectors. Applets size.
@@ -29,54 +46,48 @@ folders = {
 		'plasma-org.kde.plasma.desktop-appletsrc',	# Desktop applets.
 		'kdeglobals',								# Theme colors. Fonts. File dialog.
 		'plasmarc',									# Plasma style. Wallpapers.
-		'kwinrc',									# Compositor.
+		'kwinrc',									# KWin.
+		'kwinrulesrc',								# KWin rules.
 		'kcminputrc',								# Mouse and keyboard settings.
 		'ksplashrc',								# Splash screen.
 		'kscreenlockerrc',							# Screen locker.
+		'kxkbrc',									# Keyboard layout.
+		'kiorc',									# Trash confirmations.
+		'kactivitymanagerdrc',						# Activities.
+		'kactivitymanagerd-statsrc',				# Launcher favorites.
+		'kconf_updaterc',							# Config files version.
+		'kglobalshortcutsrc',						# Shortcuts.
+		'ksmserverrc',								# Session manager.
+		'menus/applications-kmenuedit.menu',		# Applications menu.
 		'kdedefaults/kdeglobals',					# Themes.
 		'kdedefaults/plasmarc',						# Plasma style?
 		'kdedefaults/kwinrc',						# Window decoration theme?
 		'kdedefaults/kcminputrc',					# Cursor theme.
 		'kdedefaults/kscreenlockerrc',				# Screenlocker theme.
-		'kxkbrc',									# Keyboard layout.
-		'kiorc',									# Trash confirmations.
-		'menus/applications-kmenuedit.menu',		# Applications menu.
-		'kactivitymanagerdrc',						# Activities.
-		'kactivitymanagerd-statsrc',				# Launcher favorites.
-		# 'kmixrc',
-		# 'kglobalshortcutsrc',
-		# 'klaunchrc',
-		# 'ksmserverrc',
-		# 'kwinrulesrc',
-		# 'kservicemenurc',
+		'autostart/',								# Autostart entries.
 		
-		# Applications.
-		'dolphinrc',
-		'konsolerc',
-		# 'krunnerrc',
+		# Other.
+		# 'kded5rc',
+		# 'khotkeysrc',
+		# 'ktimezonedrc',
+		# 'plasma-localerc',
 		
 		# Themes.
-		'gtk-3.0/',						# Theme colors.
-		'gtk-4.0/settings.ini',			# Theme colors.
-		'xsettingsd/xsettingsd.conf',	# Theme colors.
-		'Trolltech.conf',				# Theme colors.
-		
-		# VSCode.
-		'Code - OSS/User/settings.json',
-		
-		# Custom files.
-		'Wallpaper.png',
+		'gtk-3.0/',									# Theme colors.
+		'gtk-4.0/settings.ini',						# Theme colors.
+		'xsettingsd/xsettingsd.conf',				# Theme colors.
+		'Trolltech.conf',							# Theme colors.
 	],
 	
 	f'home/{user}/.local/share': [
 		# KDE.
 		'plasma-systemmonitor/overview.page',
-		'kscreen/',								# Screen layout.
+		'kscreen/8a3e3f1c7b5fb6c6adcfb26805261ad2',	# Screen layout.
 	],
 	
 	'': [
-		'etc/sddm.conf.d/kde_settings.conf',	# SDDM.
-		'var/lib/AccountsService/',				# User avatar and email.
+		'etc/sddm.conf.d/kde_settings.conf',		# SDDM.
+		'var/lib/AccountsService/',					# User avatar and email.
 	],
 }
 
@@ -98,28 +109,3 @@ args = [
 ] + fullFiles + [ dest ]
 
 run( args )
-
-
-
-# Not on Reddit.
-# plasmanotifyrc
-# kded5rc
-# kmixctrlrc
-
-# From Reddit.
-# breezerc
-# kaccessrc
-# kcmdisplayrc
-# kconf_updaterc
-# kdebugrc
-# kded_device_automounterrc
-# kgammarc
-# khotkeysrc
-# kmenueditrc
-# knotifyrc
-# ktimezonedrc
-# plasma-localerc
-# plasma-locale-settings.sh
-# startupconfig
-# startupconfigfiles
-# startupconfigkeys

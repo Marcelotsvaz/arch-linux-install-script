@@ -2,7 +2,7 @@ VAZnet CA
 	sudo trust anchor certificate.pem
 Secure boot
 Thunderbird config
-mesa vulkan-radeon
+Video drivers, video rendering, mesa and vulkan-radeon
 UEFI Hacking
 
 Native apps:
@@ -29,20 +29,13 @@ Fonts:
 	Noto bloat
 	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
 	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
-	adobe-source-sans-fonts ttf-cascadia-code otf-ipafont ttf-liberation
-	/deploy/aur.sh noto-fonts-lite
-	--assume-installed noto-fonts
 	https://www.nerdfonts.com/
+	adobe-source-sans-fonts otf-ipafont noto-fonts-lite
 
 
 Slow animations:
-	NO -initramfs modules? autodetect?
-	NO - zfs?
-	Small update : Disabling compositing (Alt+Shift+F12) removes the choppiness on firefox scrolling, so I guess there's something wrong with KWin... Which kwin settings should I tweak ?
 	xf86-video-intel, xf86-video-vesa, xf86-video-fbdev
 	https://www.fosskers.ca/en/blog/wayland
-	https://wiki.archlinux.org/title/ATI
-	https://wiki.archlinux.org/title/AMDGPU#AMDGPU_PRO
 
 
 ZFS Compression:
