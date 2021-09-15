@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 # 
 # 
 # 
@@ -158,7 +158,7 @@ EOF
 mkdir -p /usr/local/share/libalpm/scripts
 #-------------------------------------------------------------------------------
 cat > /usr/local/share/libalpm/scripts/mkinitcpio-install-unified << 'EOF'
-#!/bin/bash
+#!/usr/bin/bash
 kernelParameters='zfs=rootPool/root rw quiet udev.log_level=3'
 
 cd /boot
@@ -222,6 +222,28 @@ systemctl enable boot-efi.mount
 
 # Custom configuration.
 #---------------------------------------------------------------------------------------------------
+# Unlock home dataset on login.
+#-------------------------------------------------------------------------------
+cat > /usr/local/bin/unlockHomeDataset.sh << 'EOF'
+#!/usr/bin/bash
+
+# Abort on error.
+set -e
+
+dataset='rootPool/home'
+
+# If the dataset is already mounted, do nothing.
+if [[ $( zfs get -Ho value mounted ${dataset} ) == no ]]; then
+	zfs load-key ${dataset} <<< "$(cat -)"
+	zfs mount ${dataset}
+fi
+EOF
+#-------------------------------------------------------------------------------
+chmod +x /usr/local/bin/unlockHomeDataset.sh
+
+echo 'auth       required                    pam_exec.so          expose_authtok /usr/local/bin/unlockHomeDataset.sh' >> /etc/pam.d/system-auth
+
+
 # OpenSSL.
 sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
 #-------------------------------------------------------------------------------

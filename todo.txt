@@ -1,12 +1,10 @@
-ZFS
-	Encryption
-	Boot into backup snapshot
-Secure boot
-UEFI Hacking
 VAZnet CA
 	sudo trust anchor certificate.pem
+Secure boot
 Thunderbird config
 mesa vulkan-radeon
+UEFI Hacking
+Echo script to bash in chroot
 
 Native apps:
 	PDF viewer

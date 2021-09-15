@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 # 
 # 
 # 
@@ -53,8 +53,7 @@ efiPartition='/dev/disk/by-partuuid/58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
 # rootPool
 # ├── root
 # ├── home
-# ├── games
-# └── swap
+# └── games
 
 zpool create			\
 	-o ashift=13		\
@@ -69,28 +68,23 @@ zpool create			\
 	${targetDevice}
 
 
-# Root datasets.
+# Create datasets.
 zfs create							\
 	-o mountpoint=/					\
 	rootPool/root
 
-# Data datasets.
 zfs create							\
 	-o mountpoint=/home				\
+	-o canmount=noauto				\
+	-o encryption=on				\
+	-o keyformat=passphrase			\
 	rootPool/home
 
 zfs create							\
 	-o mountpoint=/usr/local/games	\
 	rootPool/games
 
-
-# zfs create					\
-# 	-V 8G					\
-# 	-b $(getconf PAGESIZE)	\
-# 	rootPool/swap
-# mkswap -f /dev/zvol/rootPool/swap
-# swapon /dev/zvol/rootPool/swap
-
+zfs mount rootPool/home	# Mount encrypted dataset.
 
 # Set boot dataset.
 zpool set bootfs=rootPool/root rootPool
