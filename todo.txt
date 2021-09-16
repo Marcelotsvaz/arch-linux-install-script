@@ -4,10 +4,9 @@ Secure boot
 Thunderbird config
 Video drivers, video rendering, mesa and vulkan-radeon
 UEFI Hacking
+The Wayland connection broke. Did the Wayland compositor die?
 
 Native apps:
-	PDF viewer
-	LibreOffice
 	iV Cam
 	Minecraft
 	Fan control
@@ -22,7 +21,6 @@ Tools:
 	ripgrep
 	zoxide
 
-
 https://github.com/fish-shell/fish-shell/issues/7485
 
 Fonts:
@@ -31,7 +29,6 @@ Fonts:
 	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
 	https://www.nerdfonts.com/
 	adobe-source-sans-fonts otf-ipafont noto-fonts-lite
-
 
 Slow animations:
 	xf86-video-intel, xf86-video-vesa, xf86-video-fbdev

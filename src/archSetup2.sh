@@ -22,9 +22,9 @@ applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kc
 applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
-everydaySoftware='firefox thunderbird keepassxc rhythmbox discord vlc flatpak'
+everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord'
 developmentSoftware='konsole code'
-misc='neofetch'
+misc='neofetch flatpak'
 
 pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
