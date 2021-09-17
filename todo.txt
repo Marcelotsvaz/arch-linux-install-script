@@ -2,6 +2,8 @@ VAZnet CA
 	sudo trust anchor certificate.pem
 Secure boot
 UEFI Hacking
+Keyboard layout
+SDDM Git: Fix hack and wayland
 
 Native apps:
 	iV Cam
@@ -18,12 +20,13 @@ Tools:
 	ripgrep
 	zoxide
 
-https://github.com/fish-shell/fish-shell/issues/7485
-
 The Wayland connection broke. Did the Wayland compositor die?
 	https://bugreports.qt.io/browse/QTBUG-66997
 	https://bugs.kde.org/show_bug.cgi?id=392376
 	https://codereview.qt-project.org/c/qt/qtwayland/+/224622/
+
+Wayland:
+	https://www.fosskers.ca/en/blog/wayland
 
 Fonts:
 	Noto bloat
@@ -31,10 +34,6 @@ Fonts:
 	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
 	https://www.nerdfonts.com/
 	adobe-source-sans-fonts otf-ipafont noto-fonts-lite
-
-Slow animations:
-	xf86-video-intel, xf86-video-vesa, xf86-video-fbdev
-	https://www.fosskers.ca/en/blog/wayland
 
 ZFS Compression:
 	None: 13:09s 9.67G
