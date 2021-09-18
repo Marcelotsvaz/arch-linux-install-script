@@ -16,10 +16,11 @@ set -e
 #---------------------------------------------------------------------------------------------------
 sed -Ei 's/^#(ParallelDownloads)/\1/' /etc/pacman.conf	# Uncomment #ParallelDownloads
 
-reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
+# Install ZFS.
 curl -O# http://archzfs.com/archive_archzfs/zfs-linux-2.0.5_5.12.13.arch1.2-1-x86_64.pkg.tar.zst
 curl -O# http://archzfs.com/archive_archzfs/zfs-utils-2.0.5-1-x86_64.pkg.tar.zst
+
 pacman --noconfirm -U zfs-{linux,utils}-*.pkg.tar.zst
 
 modprobe zfs
@@ -28,33 +29,38 @@ modprobe zfs
 
 # Variables.
 #---------------------------------------------------------------------------------------------------
+disk='/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S1AXNSAD703273K'
 mountPoint='/mnt/new'
 backupDir='/mnt/truenas/home'
-# diskSerial='S1AXNSAD703273K'
 
 
 
 # Partitioning and filesystem.
 #---------------------------------------------------------------------------------------------------
-# disk=$(lsblk -nro PATH,SERIAL | grep ${diskSerial} | cut -d ' ' -f1)
-targetDevice='/dev/disk/by-partuuid/bcde2fd2-2edb-4f31-b875-6c475a0cae7e'
+sgdisk --clear ${disk}
+sgdisk --new 1:0:+1G --change-name 1:'EFI Partition' --typecode 1:ef00 ${disk}
+sgdisk --new 2:0:+450G --change-name 2:'Root Partition' --typecode 1:8304 ${disk}
 
-efiPartition='/dev/disk/by-partuuid/58ee7a07-2189-40d7-8769-1bc4fff1ac0c'
-#efiPartition=$(lsblk -nro PATH,MOUNTPOINTS | grep ' /$' | cut -d ' ' -f1)
-#efiPartition=${efiPartition/%?/1}
-#rootUUID=$(lsblk -nro UUID,MOUNTPOINTS | grep ' /$' | cut -d ' ' -f1)
+sleep 1	# Wait for disk to be available.
 
-# sgdisk --clear ${disk}
-# sgdisk --new 1:0:+1M --change-name 1:'Boot' --typecode 1:ef02 ${disk}
-# sgdisk --new 2:0:0 --change-name 2:'Root' ${disk}
+efiPartition="${disk}-part1"
+rootPartition="${disk}-part2"
 
-# ZFS datasets layout:
-# 
+
+# EFI Partition.
+mkfs.fat -F32 ${efiPartition}
+
+
+# Root Partition.
+
+# Layout:
+#
 # rootPool
 # ├── root
 # ├── home
 # └── games
 
+# Create pool.
 zpool create			\
 	-o ashift=13		\
 	-o autotrim=on		\
@@ -65,8 +71,7 @@ zpool create			\
 	-R ${mountPoint}	\
 	-f					\
 	rootPool			\
-	${targetDevice}
-
+	${rootPartition}
 
 # Create datasets.
 zfs create							\
