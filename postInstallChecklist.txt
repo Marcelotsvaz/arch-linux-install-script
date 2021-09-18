@@ -1,0 +1,11 @@
+# 
+# 
+# 
+# 
+# Author: Marcelo Tellier Sartori Vaz
+
+
+
+Change user and home dataset passwords.
+Add SMB credentials to /etc/samba/credentials/truneas.
+Install VS Code extensions.

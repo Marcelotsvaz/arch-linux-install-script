@@ -38,9 +38,9 @@ pwd='/mnt/usb'
 
 # Partitioning and filesystem.
 #---------------------------------------------------------------------------------------------------
-sgdisk --clear ${disk}
-sgdisk --new 1:0:+1G --change-name 1:'EFI Partition' --typecode 1:ef00 ${disk}
-sgdisk --new 2:0:+450G --change-name 2:'Root Partition' --typecode 1:8304 ${disk}
+sgdisk	--clear ${disk}
+sgdisk	--new 1:0:+1G	--change-name 1:'EFI Partition'		--typecode 1:ef00	${disk}
+sgdisk	--new 2:0:+450G	--change-name 2:'Root Partition'	--typecode 2:8304	${disk}
 
 sleep 1	# Wait for disk to be available.
 

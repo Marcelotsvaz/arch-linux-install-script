@@ -58,9 +58,9 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
 
 # Install packages.
-system='linux-lts linux-firmware intel-ucode base-devel linux-lts-headers mkinitcpio efibootmgr'
+system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
 shell='fish exa tmux'
-tools='sudo nano rsync gdisk man-db'
+tools='sudo nano rsync gdisk man-db man-pages'
 developmentTools='mercurial git aws-cli openssh'
 
 pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}
@@ -194,7 +194,7 @@ chmod +x /usr/local/share/libalpm/scripts/mkinitcpio-install-unified
 
 
 # Install the kernel.
-pacman --noconfirm -S linux-lts zfs-dkms
+pacman --noconfirm -S linux zfs-dkms
 systemctl enable zfs-mount zfs.target
 
 
