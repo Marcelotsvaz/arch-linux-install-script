@@ -81,9 +81,13 @@ sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\
 cat > /etc/profile.d/cleanHome.sh << 'EOF'
 config="${XDG_CONFIG_HOME:-${HOME}/.config}"
 data="${XDG_DATA_HOME:-${HOME}/.local/share}"
+cache="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
 export KDEHOME="${config}/kde4"
+
 export VSCODE_EXTENSIONS="${data}/code-oss"
-export LESSHISTFILE="${data}/lesshst"
+
+export LESSHISTFILE="${cache}/lesshst"
+export HISTFILE="${cache}/bash_history"
 EOF
 #-------------------------------------------------------------------------------
