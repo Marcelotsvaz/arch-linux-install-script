@@ -7,5 +7,6 @@
 
 
 Change user and home dataset passwords.
+Sync SDDM theme.
 Add SMB credentials to /etc/samba/credentials/truneas.
 Install VS Code extensions.
