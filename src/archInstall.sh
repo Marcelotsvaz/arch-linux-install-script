@@ -31,7 +31,7 @@ modprobe zfs
 #---------------------------------------------------------------------------------------------------
 disk='/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S1AXNSAD703273K'
 mountPoint='/mnt/new'
-backupPath='marcelotsvaz@truenas.lan:~/Backups/Linux'
+backupPath='marcelotsvaz@truenas.lan:Backups/Linux'
 pwd='/mnt/usb'
 
 

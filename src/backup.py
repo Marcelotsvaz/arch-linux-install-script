@@ -102,15 +102,13 @@ if len( sys.argv ) > 3:
 
 for folder, files in folders.items():
 	for file in files:
-		# Escape spaces.
-		escapedFile = file.replace( ' ', '\\ ' )
-		
-		fullFiles.append( f'{src}/./{folder}/{escapedFile}' )
+		fullFiles.append( f'{src}/./{folder}/{file}' )
 
 args = [
 	'rsync',
 	'--ignore-missing-args',
 	'--relative',
+	'--protect-args',	# Without this our arguments will be interpreted by a shell in a remote host.
 	'--archive',
 	'--xattrs',
 	'--verbose',
