@@ -29,13 +29,11 @@ folders = {
 		'gwenviewrc',
 		'krunnerrc',
 		'keepassxc/keepassxc.ini',
+		'ssh/config',
 		
 		# Fish.
 		'fish/fish_variables',
-		'fish/functions/fish_prompt.fish',
-		'fish/functions/l.fish',
-		'fish/functions/ll.fish',
-		'fish/functions/la.fish',
+		'fish/functions/',
 		
 		# VSCode.
 		'Code - OSS/User/settings.json',

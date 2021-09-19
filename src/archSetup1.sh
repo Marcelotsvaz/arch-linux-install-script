@@ -272,6 +272,8 @@ cat >> /etc/ssh/sshd_config << 'EOF'
 
 
 # Custom configuration.
+AuthorizedKeysFile .config/ssh/authorized_keys
+
 PasswordAuthentication no
 
 PubkeyAcceptedKeyTypes ssh-ed25519
