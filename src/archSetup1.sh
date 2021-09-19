@@ -178,7 +178,7 @@ for kernel in vmlinuz-*; do
 	# UEFI boot entry.
 	efiPartition="/dev/disk/by-partuuid/$(lsblk -nro PARTUUID,MOUNTPOINTS | grep ' /boot/efi$' | cut -d ' ' -f1)"
 	
-	if [[ ${pkgbase} != 'linux.efi' ]]; then
+	if [[ ${pkgbase} != 'linux' ]]; then
 		variant=" (${pkgbase#linux-})"
 	fi
 	
