@@ -68,7 +68,7 @@ flatpak override --filesystem=/opt/games/steam:create com.valvesoftware.Steam
 
 # Configure software.
 #---------------------------------------------------------------------------------------------------
-# Temporally fix for SDDM not sourcing /etc/profile when fish is set as the login shell.
+# Temporary fix for SDDM not sourcing /etc/profile when fish is set as the default shell.
 sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/wayland-session
 sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/Xsession
 
