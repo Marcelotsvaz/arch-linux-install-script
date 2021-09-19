@@ -31,7 +31,7 @@ modprobe zfs
 #---------------------------------------------------------------------------------------------------
 disk='/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S1AXNSAD703273K'
 mountPoint='/mnt/new'
-backupDir='/mnt/truenas/home'
+backupPath='marcelotsvaz@truenas.lan:~/Backups/Linux'
 pwd='/mnt/usb'
 
 
@@ -115,13 +115,9 @@ ln -sf /run/systemd/resolve/stub-resolv.conf ${mountPoint}/etc/resolv.conf
 
 
 
-# Restore configuration.
+# Restore desktop configuration.
 #---------------------------------------------------------------------------------------------------
-mkdir -p ${backupDir}
-mount -t cifs //truenas.lan/marcelotsvaz ${backupDir} -o credentials=${pwd}/credentials,cifsacl
-${pwd}/src/backup.py ${backupDir}/Backups/Linux ${mountPoint}
-chown -R 1000:1000 ${mountPoint}/home/marcelotsvaz
-umount ${backupDir}
+${pwd}/src/backup.py ${backupPath} ${mountPoint} ${pwd}/truenas.pem
 
 # Create snapshot.
 zfs snapshot -r rootPool@initial

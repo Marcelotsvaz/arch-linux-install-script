@@ -5,6 +5,8 @@
 # 
 # Author: Marcelo Tellier Sartori Vaz
 
+# TODO: Only run as super user.
+
 
 
 import sys
@@ -17,6 +19,7 @@ user = 'marcelotsvaz'
 folders = {
 	f'home/{user}': [
 		'.passwords.kdbx',							# KeePassXC database.
+		'.mozilla',									# Symlink to .local/share/firefox.
 	],
 	
 	f'home/{user}/.config': [
@@ -95,17 +98,26 @@ fullFiles = []
 
 src = sys.argv[1]
 dest = sys.argv[2]
+identity = ''
+if len( sys.argv ) > 3:
+	identity = sys.argv[3]
 
 for folder, files in folders.items():
 	for file in files:
-		fullFiles.append( f'{src}/./{folder}/{file}' )
+		# Escape spaces.
+		escapedFile = file.replace( ' ', '\\ ' )
+		
+		fullFiles.append( f'{src}/./{folder}/{escapedFile}' )
 
 args = [
 	'rsync',
 	'--ignore-missing-args',
-	'-aRv',
-	'--no-o',
-	'--no-g',
+	'--relative',
+	'--archive',
+	'--xattrs',
+	'--verbose',
+	'-M--fake-super',
+	f'--rsh=ssh -i {identity}' if identity else '--rsh=ssh',
 ] + fullFiles + [ dest ]
 
 run( args )
