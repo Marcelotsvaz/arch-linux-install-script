@@ -8,6 +8,7 @@ SDDM Git: Fix hack and wayland
 Configs:
 	Steam
 	Firefox
+	SSH keys
 
 Native apps:
 	iV Cam

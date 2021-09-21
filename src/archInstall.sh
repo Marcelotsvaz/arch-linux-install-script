@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 # 
+# Arch Linux Install Script
 # 
 # 
-# 
-# Author: Marcelo Tellier Sartori Vaz
+# Author: Marcelo Tellier Sartori Vaz <marcelotsvaz@gmail.com>
 
 
 

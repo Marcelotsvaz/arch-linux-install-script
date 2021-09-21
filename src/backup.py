@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # 
+# Arch Linux Configuration Backup
 # 
 # 
-# 
-# Author: Marcelo Tellier Sartori Vaz
+# Author: Marcelo Tellier Sartori Vaz <marcelotsvaz@gmail.com>
 
 # TODO: Only run as super user.
 
