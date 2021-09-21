@@ -75,19 +75,3 @@ sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/Xsession
 # Enable Microsoft VSCode marketplace.
 sed -Ei 's/("serviceUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery",/' /usr/lib/code/product.json
 sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\t\t"cacheUrl": "https:\/\/vscode.blob.core.windows.net\/gallery\/index"/' /usr/lib/code/product.json
-
-# Move file outside home.
-#-------------------------------------------------------------------------------
-cat > /etc/profile.d/cleanHome.sh << 'EOF'
-config="${XDG_CONFIG_HOME:-${HOME}/.config}"
-data="${XDG_DATA_HOME:-${HOME}/.local/share}"
-cache="${XDG_CACHE_HOME:-${HOME}/.cache}"
-
-export KDEHOME="${config}/kde4"
-
-export VSCODE_EXTENSIONS="${data}/code-oss"
-
-export LESSHISTFILE="${cache}/lesshst"
-export HISTFILE="${cache}/bash_history"
-EOF
-#-------------------------------------------------------------------------------
