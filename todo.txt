@@ -5,6 +5,10 @@ UEFI Hacking
 Keyboard layout
 SDDM Git: Fix hack and wayland
 
+Configs:
+	Steam
+	Firefox
+
 Native apps:
 	iV Cam
 	Minecraft

@@ -6,7 +6,22 @@
 
 
 
-Change user and home dataset passwords.
-Sync SDDM theme.
-Add SMB credentials to /etc/samba/credentials/truneas.
-Install VS Code extensions.
+Sync documents and desktop
+Change user and home dataset passwords
+Sync SDDM theme
+Add SMB credentials to /etc/samba/credentials/truneas
+Install VS Code extensions
+	vscode-icons-team.vscode-icons
+	ms-python.python
+		ms-python.vscode-pylance
+		ms-toolsai.jupyter
+	samuelcolvin.jinjahtml
+	bmalehorn.vscode-fish
+	mrcrowl.hg
+	pucelle.run-on-save
+	medo64.render-crlf
+Install Firefox extensions:
+	uBlock Origin
+	KeePassXC
+	Plasma Integration
+Configure Steam Library

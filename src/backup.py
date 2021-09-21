@@ -18,22 +18,18 @@ user = 'marcelotsvaz'
 
 folders = {
 	f'home/{user}': [
-		'.passwords.kdbx',							# KeePassXC database.
 		'.mozilla',									# Symlink to .local/share/firefox.
 	],
 	
 	f'home/{user}/.config': [
 		# Applications.
-		'dolphinrc',
+		'fish/',
+		'ssh/config',
 		'konsolerc',
+		'dolphinrc',
 		'gwenviewrc',
 		'krunnerrc',
 		'keepassxc/keepassxc.ini',
-		'ssh/config',
-		
-		# Fish.
-		'fish/fish_variables',
-		'fish/functions/',
 		
 		# VSCode.
 		'Code - OSS/User/settings.json',
@@ -81,8 +77,13 @@ folders = {
 	],
 	
 	f'home/{user}/.local/share': [
+		# Applications.
+		'konsole/',									# Konsole profiles and keymaps.
+		'kxmlgui5/konsole',							# Konsole GUI and shortcuts.
+		'passwords.kdbx',							# KeePassXC database.
+		
 		# KDE.
-		'plasma-systemmonitor/overview.page',
+		'plasma-systemmonitor/',					# System Monitor pages.
 		'kscreen/8a3e3f1c7b5fb6c6adcfb26805261ad2',	# Screen layout.
 	],
 	
