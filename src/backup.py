@@ -79,7 +79,8 @@ folders = {
 	f'home/{user}/.local/share': [
 		# Applications.
 		'konsole/',									# Konsole profiles and keymaps.
-		'kxmlgui5/konsole',							# Konsole GUI and shortcuts.
+		'kxmlgui5/konsole/',						# Konsole GUI and shortcuts.
+		'kxmlgui5/dolphin/dolphinui.rc',			# Dolphin GUI and shortcuts.
 		'passwords.kdbx',							# KeePassXC database.
 		
 		# KDE.
