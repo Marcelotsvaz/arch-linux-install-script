@@ -30,6 +30,7 @@ folders = {
 		'gwenviewrc',
 		'krunnerrc',
 		'keepassxc/keepassxc.ini',
+		'awakened-poe-trade/apt-data/config.json',
 		
 		# VSCode.
 		'Code - OSS/User/settings.json',
@@ -82,6 +83,7 @@ folders = {
 		'kxmlgui5/konsole/',						# Konsole GUI and shortcuts.
 		'kxmlgui5/dolphin/dolphinui.rc',			# Dolphin GUI and shortcuts.
 		'passwords.kdbx',							# KeePassXC database.
+		'pobfrontend/Path of Building/Builds/',		# Path of Building builds.
 		
 		# KDE.
 		'plasma-systemmonitor/',					# System Monitor pages.

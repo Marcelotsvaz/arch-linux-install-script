@@ -39,6 +39,7 @@ systemctl enable sddm
 
 # Games.
 #---------------------------------------------------------------------------------------------------
+# Install Steam.
 gamesFolder='/usr/local/games'
 setfacl -m u:marcelotsvaz:rwx ${gamesFolder}
 
@@ -60,9 +61,12 @@ EOF
 #-------------------------------------------------------------------------------
 systemctl enable opt-games.mount
 
-# Install Steam.
 flatpak install --assumeyes com.valvesoftware.Steam
 flatpak override --filesystem=/opt/games/steam:create com.valvesoftware.Steam
+
+
+# Path of Exile stuff.
+sudo -u marcelotsvaz yay -S path-of-building-community-git awakened-poe-trade-git
 
 
 
