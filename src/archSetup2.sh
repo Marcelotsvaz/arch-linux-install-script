@@ -30,7 +30,7 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S pipewire-jack-dropin
+sudo -u marcelotsvaz yay -S pipewire-jack-dropin code-marketplace code-features
 
 npm install -g less
 
@@ -77,7 +77,3 @@ sudo -u marcelotsvaz yay -S path-of-building-community-git awakened-poe-trade-gi
 # Temporary fix for SDDM not sourcing /etc/profile when fish is set as the default shell.
 sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/wayland-session
 sed -Ei 's/--login.*sh/\0 --login/' /usr/share/sddm/scripts/Xsession
-
-# Enable Microsoft VSCode marketplace.
-sed -Ei 's/("serviceUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery",/' /usr/lib/code/product.json
-sed -Ei 's/("itemUrl": ).*/\1"https:\/\/marketplace.visualstudio.com\/items",\n\t\t"cacheUrl": "https:\/\/vscode.blob.core.windows.net\/gallery\/index"/' /usr/lib/code/product.json
