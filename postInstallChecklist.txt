@@ -22,6 +22,7 @@ Install VS Code extensions
 	medo64.render-crlf
 Install Firefox extensions:
 	uBlock Origin
-	KeePassXC
+	KeePassXC-Browser
 	Plasma Integration
+	BetterTTV
 Configure Steam Library
