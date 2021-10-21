@@ -25,6 +25,9 @@ folders = {
 		# Applications.
 		'fish/',
 		'ssh/config',
+		'git/config',
+		'hg/hgrc',
+		'aws/config',
 		'konsolerc',
 		'dolphinrc',
 		'gwenviewrc',
