@@ -7,7 +7,7 @@ SDDM Git: Fix hack and wayland
 
 Configs:
 	Steam
-	Firefox
+	Firefox settings and favorites
 	SSH keys
 
 Native apps:

@@ -25,4 +25,5 @@ Install Firefox extensions:
 	KeePassXC-Browser
 	Plasma Integration
 	BetterTTV
+Restore uBlock configuration
 Configure Steam Library

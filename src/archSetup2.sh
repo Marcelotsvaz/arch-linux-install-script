@@ -23,7 +23,7 @@ applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
 everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord'
-developmentSoftware='konsole code npm'
+developmentSoftware='konsole code docker npm'
 misc='neofetch flatpak'
 
 pacman --noconfirm -S													\
@@ -35,7 +35,7 @@ sudo -u marcelotsvaz yay -S pipewire-jack-dropin code-marketplace code-features
 npm install -g less
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm
+systemctl enable sddm docker
 
 
 
