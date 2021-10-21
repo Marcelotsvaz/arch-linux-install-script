@@ -86,6 +86,7 @@ folders = {
 		'kxmlgui5/konsole/',						# Konsole GUI and shortcuts.
 		'kxmlgui5/dolphin/dolphinui.rc',			# Dolphin GUI and shortcuts.
 		'passwords.kdbx',							# KeePassXC database.
+		'rhythmbox',								# Rhythmbox.
 		'pobfrontend/Path of Building/Builds/',		# Path of Building builds.
 		
 		# KDE.
