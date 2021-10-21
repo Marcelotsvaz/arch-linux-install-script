@@ -18,11 +18,11 @@ set -e
 desktopEnvironment='plasma-desktop plasma-wayland-session libva-mesa-driver phonon-qt5-vlc sddm'
 fonts='noto-fonts-cjk noto-fonts-emoji ttf-cascadia-code ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
-applets='kscreen plasma-pa kinfocenter plasma-disks plasma-systemmonitor sddm-kcm plasma-browser-integration drkonqi kde-gtk-config breeze-gtk'
+applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
-everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord'
+everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups'
 developmentSoftware='konsole code docker npm'
 misc='neofetch flatpak'
 
@@ -35,7 +35,7 @@ sudo -u marcelotsvaz yay -S pipewire-jack-dropin code-marketplace code-features
 npm install -g less
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm docker
+systemctl enable sddm cups docker
 
 
 
