@@ -90,6 +90,10 @@ zfs create							\
 	-o mountpoint=/usr/local/games	\
 	rootPool/games
 
+zfs create							\
+	-o mountpoint=/var/lib/docker	\
+	rootPool/docker
+
 zfs mount rootPool/home	# Mount encrypted dataset.
 
 # Set boot dataset.
