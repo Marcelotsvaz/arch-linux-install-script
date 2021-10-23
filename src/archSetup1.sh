@@ -244,6 +244,67 @@ chmod +x /usr/local/lib/unlockHomeDataset
 echo 'auth       required                    pam_exec.so          expose_authtok /usr/local/lib/unlockHomeDataset' >> /etc/pam.d/system-auth
 
 
+# Automatic snapshots.
+
+# Snapshot script.
+#-------------------------------------------------------------------------------
+cat > /usr/local/bin/backup << 'EOF'
+#!/usr/bin/bash
+
+if [[ -z "${1}" ]]; then
+	snapshotReason='manual'
+else
+	snapshotReason="${1}"
+fi
+
+datasets='rootPool rootPool/root rootPool/home rootPool/games'
+backupDataset='dataPool/backups'
+
+for dataset in ${datasets}; do
+	lastSnapshot=$(zfs list -H -t snapshot -S creation -o name ${dataset} | head -n 1)
+	newSnapshot="${dataset}@${snapshotReason}-$(date +'%Y-%m-%dT%H:%M')"
+	
+	zfs snapshot "${newSnapshot}"
+	
+	zfs send -pwi "${lastSnapshot}" "${newSnapshot}" \
+	| ssh -i ~marcelotsvaz/.config/ssh/truenas.pem marcelotsvaz@truenas.lan \
+	zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
+done
+EOF
+#-------------------------------------------------------------------------------
+chmod +x /usr/local/bin/backup
+
+# Snapshot service.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/backup.service << 'EOF'
+[Unit]
+Description = Backup
+
+[Service]
+Type = oneshot
+
+ExecStart = /usr/local/bin/backup daily
+EOF
+#-------------------------------------------------------------------------------
+
+# Snapshot timer.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/backup.timer << 'EOF'
+[Unit]
+Description = Backup Timer
+Requires = network-online.target
+After = network-online.target
+
+[Timer]
+OnCalendar = daily
+
+[Install]
+WantedBy = timers.target
+EOF
+#-------------------------------------------------------------------------------
+systemctl enable backup.timer
+
+
 # OpenSSL.
 sed -Ei 's/^\[ new_oids \]$/\.include custom\.cnf\n\n\0/' /etc/ssl/openssl.cnf	# Add ".include custom.cnf".
 #-------------------------------------------------------------------------------

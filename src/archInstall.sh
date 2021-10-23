@@ -68,6 +68,7 @@ zpool create			\
 	-O xattr=sa			\
 	-O acltype=posixacl	\
 	-O compression=zstd	\
+	-O snapdir=visible	\
 	-O mountpoint=none	\
 	-R ${mountPoint}	\
 	-f					\

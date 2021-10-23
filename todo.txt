@@ -4,6 +4,9 @@ Secure boot
 UEFI Hacking
 Keyboard layout
 SDDM Git: Fix hack and wayland
+File name dates should include timezone?
+Recovery partition (clone?)
+Print progress information on scripts
 
 Configs:
 	Steam
@@ -44,3 +47,21 @@ ZFS Compression:
 	None: 13:09s 9.67G
 	lz4: R1.77x
 	zstad 13:45s 5.38G R1.91x
+
+
+# TrueNAS permissions.
+sudo zfs allow marcelotsvaz create,mount,receive,send,xattr,acltype,compression,snapdir,mountpoint,canmount dataPool/backups
+
+
+# Initial snapshot.
+datasets='rootPool rootPool/root rootPool/home rootPool/games'
+
+for dataset in ${datasets}; do
+	sudo zfs send -pw "${dataset}@initial" \
+	| ssh -i ~marcelotsvaz/.config/ssh/truenas.pem marcelotsvaz@truenas.lan \
+	zfs receive -ux mountpoint "dataPool/backups/${dataset}"
+done
+
+
+# Restore.
+ssh truenas zfs send -bw dataPool/backups/rootPool/games@initial | sudo zfs receive -u rootPool/testGames
