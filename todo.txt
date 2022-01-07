@@ -14,7 +14,7 @@ Install virt-manager
 Configs:
 	Steam
 	Firefox settings and favorites
-	SSH keys and AWS credentials
+	AWS credentials
 
 Native apps:
 	Minecraft

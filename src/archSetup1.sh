@@ -329,6 +329,20 @@ EOF
 
 # SSH.
 #-------------------------------------------------------------------------------
+cat > /etc/systemd/user/ssh-agent.service << 'EOF'
+[Unit]
+Description = SSH Key Agent
+
+[Service]
+Type = simple
+ExecStart = /usr/bin/ssh-agent -Da %t/ssh-agent.socket
+
+[Install]
+WantedBy = default.target
+EOF
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
 cat >> /etc/ssh/sshd_config << 'EOF'
 
 
@@ -345,6 +359,8 @@ Ciphers chacha20-poly1305@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
 EOF
 #-------------------------------------------------------------------------------
+
+systemctl --global enable ssh-agent
 systemctl enable sshd
 
 
