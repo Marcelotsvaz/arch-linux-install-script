@@ -1,12 +1,15 @@
+Baloo python venv - balooctl config add excludeFilters env
 VAZnet CA
 	sudo trust anchor certificate.pem
 Secure boot
 UEFI Hacking
-Keyboard layout
 SDDM Git: Fix hack and wayland
 File name dates should include timezone?
 Recovery partition (clone?)
 Print progress information on scripts
+Create datasets on setup instead of install script
+Fix docker network
+Install virt-manager
 
 Configs:
 	Steam
@@ -14,7 +17,6 @@ Configs:
 	SSH keys and AWS credentials
 
 Native apps:
-	iV Cam
 	Minecraft
 	Fan control
 
