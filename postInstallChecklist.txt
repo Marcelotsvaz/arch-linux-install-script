@@ -12,14 +12,17 @@ Sync SDDM theme
 Add SMB credentials to /etc/samba/credentials/truneas
 Install VS Code extensions
 	vscode-icons-team.vscode-icons
+	ms-azuretools.vscode-docker
 	ms-python.python
 		ms-python.vscode-pylance
 		ms-toolsai.jupyter
+		ms-toolsai.jupyter-keymap
 	samuelcolvin.jinjahtml
 	bmalehorn.vscode-fish
 	mrcrowl.hg
 	pucelle.run-on-save
 	medo64.render-crlf
+	hashicorp.terraform
 Install Firefox extensions:
 	uBlock Origin
 	KeePassXC-Browser

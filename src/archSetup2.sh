@@ -23,7 +23,7 @@ applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
 everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms obs-ndi torbrowser-launcher'
-developmentSoftware='konsole code docker npm'
+developmentSoftware='konsole code docker docker-compose terraform npm'
 misc='neofetch flatpak'
 
 pacman --noconfirm -S													\

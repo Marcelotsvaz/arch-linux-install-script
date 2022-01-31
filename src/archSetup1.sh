@@ -61,7 +61,7 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
 shell='fish exa htop tmux'
 tools='sudo nano rsync gdisk man-db man-pages'
-developmentTools='mercurial git aws-cli openssh'
+developmentTools='git mercurial aws-cli openssh'
 
 pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}
 
