@@ -30,7 +30,7 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S pipewire-jack-dropin code-marketplace code-features
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice
 
 npm install -g less
 

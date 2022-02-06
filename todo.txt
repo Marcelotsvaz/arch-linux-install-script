@@ -9,6 +9,7 @@ Recovery partition (clone?)
 Print progress information on scripts
 Create datasets on setup instead of install script
 Fix docker network
+Check docker usergroup
 Install virt-manager
 
 Configs:
