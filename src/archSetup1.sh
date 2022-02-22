@@ -113,8 +113,15 @@ cat > /etc/systemd/network/main.network << 'EOF'
 [Match]
 Name = en*
 
+[Link]
+Multicast = yes
+
 [Network]
 DHCP = yes
+MulticastDNS = yes
+
+[DHCPv4]
+UseDomains = yes
 EOF
 #-------------------------------------------------------------------------------
 systemctl enable systemd-{networkd,resolved,timesyncd}
