@@ -1,6 +1,4 @@
 Baloo python venv - balooctl config add excludeFilters env
-VAZnet CA
-	sudo trust anchor certificate.pem
 Secure boot
 UEFI Hacking
 SDDM Git: Fix hack and wayland
@@ -49,7 +47,7 @@ Fonts:
 ZFS Compression:
 	None: 13:09s 9.67G
 	lz4: R1.77x
-	zstad 13:45s 5.38G R1.91x
+	zstd 13:45s 5.38G R1.91x
 
 
 # TrueNAS permissions.
