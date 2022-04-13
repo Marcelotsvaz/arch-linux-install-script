@@ -9,6 +9,7 @@ Create datasets on setup instead of install script
 Fix docker network
 Check docker usergroup
 Install virt-manager
+kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
 
 Configs:
 	Steam
@@ -55,12 +56,18 @@ sudo zfs allow marcelotsvaz create,mount,receive,send,xattr,acltype,compression,
 
 
 # Initial snapshot.
+export SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
 datasets='rootPool rootPool/root rootPool/home rootPool/games'
+backupDataset='dataPool/backups'
+snapshotReason='initial'
 
 for dataset in ${datasets}; do
-	sudo zfs send -pw "${dataset}@initial" \
-	| ssh -i ~marcelotsvaz/.config/ssh/truenas.pem marcelotsvaz@truenas.lan \
-	zfs receive -ux mountpoint "dataPool/backups/${dataset}"
+	newSnapshot="${dataset}@${snapshotReason}-$(date +'%Y-%m-%dT%H:%M')"
+	
+	zfs snapshot "${newSnapshot}"
+	
+	zfs send -pw "${newSnapshot}" \
+	| ssh marcelotsvaz@truenas.lan zfs receive -ux mountpoint "${backupDataset}/${dataset}"
 done
 
 

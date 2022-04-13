@@ -22,7 +22,7 @@ applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemm
 applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
-everydaySoftware='firefox thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms obs-ndi torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms obs-ndi torbrowser-launcher'
 developmentSoftware='konsole code docker docker-compose terraform'
 misc='neofetch flatpak'
 

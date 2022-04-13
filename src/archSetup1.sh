@@ -264,6 +264,7 @@ else
 	snapshotReason="${1}"
 fi
 
+export SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
 datasets='rootPool rootPool/root rootPool/home rootPool/games'
 backupDataset='dataPool/backups'
 
@@ -274,8 +275,7 @@ for dataset in ${datasets}; do
 	zfs snapshot "${newSnapshot}"
 	
 	zfs send -pwi "${lastSnapshot}" "${newSnapshot}" \
-	| ssh -i ~marcelotsvaz/.config/ssh/truenas.pem marcelotsvaz@truenas.lan \
-	zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
+	| ssh marcelotsvaz@truenas.lan zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
 done
 EOF
 #-------------------------------------------------------------------------------
