@@ -10,6 +10,13 @@ Fix docker network
 Check docker usergroup
 Install virt-manager
 kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
+https://aur.archlinux.org/packages/discord_arch_electron
+VSCode profiles
+Maintenance
+	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages
+	sudo pacman -Scc	# Clean cache
+noise-suppression-for-voice
+ZFS backup destination read-only
 
 Configs:
 	Steam
@@ -73,3 +80,15 @@ done
 
 # Restore.
 ssh truenas zfs send -bw dataPool/backups/rootPool/games@initial | sudo zfs receive -u rootPool/testGames
+
+
+
+
+
+
+
+
+
+
+
+xdg-desktop-portal-kde

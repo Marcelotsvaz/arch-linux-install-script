@@ -258,24 +258,24 @@ echo 'auth       required                    pam_exec.so          expose_authtok
 cat > /usr/local/bin/backup << 'EOF'
 #!/usr/bin/bash
 
+export SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
+datasets='rootPool rootPool/root rootPool/home rootPool/games'
+backupDataset='dataPool/backups'
+sshTarget='marcelotsvaz@truenas.lan'
+
 if [[ -z "${1}" ]]; then
 	snapshotReason='manual'
 else
 	snapshotReason="${1}"
 fi
 
-export SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
-datasets='rootPool rootPool/root rootPool/home rootPool/games'
-backupDataset='dataPool/backups'
-
 for dataset in ${datasets}; do
-	lastSnapshot=$(zfs list -H -t snapshot -S creation -o name ${dataset} | head -n 1)
 	newSnapshot="${dataset}@${snapshotReason}-$(date +'%Y-%m-%dT%H:%M')"
-	
 	zfs snapshot "${newSnapshot}"
 	
-	zfs send -pwi "${lastSnapshot}" "${newSnapshot}" \
-	| ssh marcelotsvaz@truenas.lan zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
+	lastSnapshot=$(ssh ${sshTarget} zfs list -Ht snapshot -S creation -o name ${backupDataset}/${dataset} | head -n 1)
+	zfs send -pwI "${lastSnapshot#${backupDataset}/}" "${newSnapshot}" \
+	| ssh ${sshTarget} zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
 done
 EOF
 #-------------------------------------------------------------------------------
