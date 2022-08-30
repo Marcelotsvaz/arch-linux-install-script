@@ -23,7 +23,7 @@ applications='dolphin gwenview ark spectacle qjackctl'
 
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms obs-ndi torbrowser-launcher'
-developmentSoftware='konsole code docker docker-compose terraform'
+developmentSoftware='konsole code docker docker-compose terraform packer ansible'
 misc='neofetch flatpak'
 
 pacman --noconfirm -S													\
@@ -33,7 +33,7 @@ pacman --noconfirm -S													\
 sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm cups docker
+systemctl enable sddm cups
 
 
 

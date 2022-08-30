@@ -9,9 +9,13 @@ Create datasets on setup instead of install script
 Fix docker network
 Check docker usergroup
 Install virt-manager
+systemctl alias
+Deprecated feature: REMAKE_INITRD
+Alias with sudo
 kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
 https://aur.archlinux.org/packages/discord_arch_electron
 VSCode profiles
+https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
 Maintenance
 	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages
 	sudo pacman -Scc	# Clean cache
@@ -92,3 +96,19 @@ ssh truenas zfs send -bw dataPool/backups/rootPool/games@initial | sudo zfs rece
 
 
 xdg-desktop-portal-kde
+
+
+
+
+
+
+
+
+
+# Silence Docker spam.
+#-------------------------------------------------------------------------------
+cat > /etc/systemd/system/run-docker-.mount.d/silence.conf << 'EOF'
+[Mount]
+LogLevelMax = notice
+EOF
+#-------------------------------------------------------------------------------
