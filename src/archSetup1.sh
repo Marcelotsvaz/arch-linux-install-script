@@ -43,7 +43,9 @@ cat >> /etc/pacman.conf << 'EOF'
 
 # Custom config.
 [options]
-ParallelDownloads = 5
+ParallelDownloads = 10
+UseSyslog
+VerbosePkgLists
 Color
 
 [archzfs]
