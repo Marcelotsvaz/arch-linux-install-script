@@ -15,6 +15,7 @@ Alias with sudo
 kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
 https://aur.archlinux.org/packages/discord_arch_electron
 VSCode profiles
+Firefox and Thunderbird addons
 https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
 Maintenance
 	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages

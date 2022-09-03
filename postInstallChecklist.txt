@@ -23,6 +23,9 @@ Install VS Code extensions
 	pucelle.run-on-save
 	medo64.render-crlf
 	hashicorp.terraform
+	4ops.packer
+	coolbear.systemd-unit-file
+	arturock.gitstash
 Install Firefox extensions:
 	uBlock Origin
 	KeePassXC-Browser
