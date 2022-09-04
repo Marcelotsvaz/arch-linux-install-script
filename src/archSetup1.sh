@@ -387,7 +387,7 @@ Description = Mount SMB shares
 What = //truenas.lan/marcelotsvaz
 Where = /mnt/truenas/home
 Type = cifs
-Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl,nofail
 
 [Install]
 WantedBy = multi-user.target
@@ -402,7 +402,7 @@ Description = Mount SMB shares
 What = //truenas.lan/media
 Where = /mnt/truenas/media
 Type = cifs
-Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl,nofail
 
 [Install]
 WantedBy = multi-user.target
@@ -417,7 +417,7 @@ Description = Mount SMB shares
 What = //truenas.lan/Backup
 Where = /mnt/truenas/backups
 Type = cifs
-Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl
+Options = credentials=/etc/samba/credentials/truenas,uid=marcelotsvaz,gid=marcelotsvaz,cifsacl,nofail
 
 [Install]
 WantedBy = multi-user.target

@@ -7,6 +7,7 @@ Recovery partition (clone?)
 Print progress information on scripts
 Create datasets on setup instead of install script
 Fix docker network
+exa folders first
 Check docker usergroup
 Install virt-manager
 systemctl alias
@@ -22,6 +23,7 @@ Maintenance
 	sudo pacman -Scc	# Clean cache
 noise-suppression-for-voice
 ZFS backup destination read-only
+Pass color sudo less
 
 Configs:
 	Steam
