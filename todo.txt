@@ -1,3 +1,4 @@
+Aliases with sudo
 Baloo python venv - balooctl config add excludeFilters env
 Secure boot
 UEFI Hacking
@@ -7,28 +8,24 @@ Recovery partition (clone?)
 Print progress information on scripts
 Create datasets on setup instead of install script
 Fix docker network
-exa folders first
 Check docker usergroup
 Install virt-manager
-systemctl alias
 Deprecated feature: REMAKE_INITRD
-Alias with sudo
 kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
-https://aur.archlinux.org/packages/discord_arch_electron
 VSCode profiles
-Firefox and Thunderbird addons
+https://aur.archlinux.org/packages/discord_arch_electron
 https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+Firefox and Thunderbird addons
 Maintenance
 	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages
 	sudo pacman -Scc	# Clean cache
 noise-suppression-for-voice
 ZFS backup destination read-only
-Pass color sudo less
+Mount NAS shares with user unit and get password from KeePassXC
 
 Configs:
 	Steam
 	Firefox settings and favorites
-	AWS credentials
 
 Native apps:
 	Minecraft
@@ -87,24 +84,6 @@ done
 
 # Restore.
 ssh truenas zfs send -bw dataPool/backups/rootPool/games@initial | sudo zfs receive -u rootPool/testGames
-
-
-
-
-
-
-
-
-
-
-
-xdg-desktop-portal-kde
-
-
-
-
-
-
 
 
 

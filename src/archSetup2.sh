@@ -37,6 +37,30 @@ systemctl enable sddm cups
 
 
 
+# Get AWS credentials from KeePassXC.
+#---------------------------------------------------------------------------------------------------
+cat > /usr/local/lib/getAwsCredentials << 'EOF'
+#!/usr/bin/bash
+
+profile=${1}
+
+usernameRegex='^attribute.UserName = '
+
+# TODO: Remove stderr redirection.
+accessKeyId=$(secret-tool search Service aws Profile ${profile} 2>&1 | grep "${usernameRegex}" | sed "s/${usernameRegex}//")
+secretAccessKey=$(secret-tool lookup Service aws Profile ${profile})
+
+cat << EOF2
+{
+	"Version": 1,
+	"AccessKeyId": "${accessKeyId}",
+	"SecretAccessKey": "${secretAccessKey}"
+}
+EOF2
+EOF
+
+
+
 # Games.
 #---------------------------------------------------------------------------------------------------
 # Install Steam.
