@@ -11,7 +11,6 @@ Fix docker network
 Check docker usergroup
 Install virt-manager
 Deprecated feature: REMAKE_INITRD
-kimageformats HEIC HEIF images and thumbnails / kimageformats vs qt5-imageformats / thumbnails worked after setting default program
 VSCode profiles
 https://aur.archlinux.org/packages/discord_arch_electron
 https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
