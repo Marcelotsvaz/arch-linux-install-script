@@ -33,7 +33,7 @@ pacman --noconfirm -S													\
 sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm cups
+systemctl enable sddm cups docker.socket
 
 
 
