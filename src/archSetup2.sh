@@ -30,7 +30,7 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice obs-ndi
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice obs-plugin-ios-camera-source-git obs-ndi
 
 systemctl --global enable pipewire-pulse
 systemctl enable sddm docker.socket
