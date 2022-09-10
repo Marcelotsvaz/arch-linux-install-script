@@ -1,5 +1,7 @@
 Aliases with sudo
 Baloo python venv - balooctl config add excludeFilters env
+mDNS with systemd-networkd
+CUPS socket activation
 Secure boot
 UEFI Hacking
 SDDM Git: Fix hack and wayland

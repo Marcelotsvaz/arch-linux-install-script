@@ -22,7 +22,7 @@ applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemm
 applications='dolphin gwenview ark spectacle qjackctl kimageformats qt5-imageformats'
 
 # Main applications.
-everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms obs-ndi torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms torbrowser-launcher'
 developmentSoftware='konsole code docker docker-compose terraform packer ansible'
 misc='neofetch flatpak'
 
@@ -30,10 +30,10 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice obs-ndi
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm cups docker.socket
+systemctl enable sddm docker.socket
 
 
 
