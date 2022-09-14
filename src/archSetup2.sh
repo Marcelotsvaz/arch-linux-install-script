@@ -23,7 +23,7 @@ applications='dolphin gwenview ark spectacle qjackctl kimageformats qt5-imagefor
 
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms torbrowser-launcher'
-developmentSoftware='konsole code docker docker-compose terraform packer ansible'
+developmentSoftware='konsole code docker docker-buildx docker-compose terraform packer ansible'
 misc='neofetch flatpak'
 
 pacman --noconfirm -S													\

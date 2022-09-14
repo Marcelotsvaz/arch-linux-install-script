@@ -6,7 +6,7 @@ Secure boot
 UEFI Hacking
 SDDM Git: Fix hack and wayland
 File name dates should include timezone?
-Recovery partition (clone?)
+Recovery partition (clone?) / rescue and emergency targets
 Print progress information on scripts
 Create datasets on setup instead of install script
 Fix docker network
@@ -16,6 +16,10 @@ Deprecated feature: REMAKE_INITRD
 VSCode profiles
 https://aur.archlinux.org/packages/discord_arch_electron
 https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+https://www.freedesktop.org/software/systemd/man/pam_systemd_home.html
+https://unix.stackexchange.com/questions/236659/what-is-the-point-of-mv-f-when-default-behavior-already-overwrites-files
+https://stackoverflow.com/questions/28261972/redirect-file-access
+https://github.com/openzfs/zfs/issues/13128
 Firefox and Thunderbird addons
 Maintenance
 	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages
