@@ -49,7 +49,7 @@ rootPartition="${disk}-part2"
 
 
 # EFI Partition.
-mkfs.fat -F32 ${efiPartition}
+mkfs.fat -F 32 ${efiPartition}
 
 
 # Root Partition.
