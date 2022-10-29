@@ -24,16 +24,17 @@ applications='dolphin gwenview ark spectacle qjackctl kimageformats qt5-imagefor
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms torbrowser-launcher'
 developmentSoftware='konsole code docker docker-buildx docker-compose terraform packer ansible'
-misc='neofetch flatpak'
+misc='neofetch flatpak jre-openjdk'
 
 pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice obs-plugin-ios-camera-source-git obs-ndi
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin
 
 systemctl --global enable pipewire-pulse
 systemctl enable sddm docker.socket
+archlinux-java set java-19-openjdk
 
 
 
