@@ -159,7 +159,7 @@ Target = amd-ucode
 [Action]
 Description = Updating linux initcpios...
 When = PostTransaction
-Exec = /bin/sh -c '/usr/share/libalpm/scripts/mkinitcpio-install && /usr/local/share/libalpm/scripts/mkinitcpio-install-unified'
+Exec = /bin/sh -c '/usr/share/libalpm/scripts/mkinitcpio install && /usr/local/share/libalpm/scripts/mkinitcpio-install-unified'
 NeedsTargets
 EOF
 #-------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Go
 Check EDITOR VISUAL
 Fix terminal scroll in SSH
 Aliases with sudo
