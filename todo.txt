@@ -1,3 +1,5 @@
+Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
+Check relative path in mkinitcpio hook
 Go
 Check EDITOR VISUAL
 Fix terminal scroll in SSH

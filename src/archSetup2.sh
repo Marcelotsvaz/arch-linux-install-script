@@ -40,7 +40,7 @@ archlinux-java set java-19-openjdk
 
 # Get AWS credentials from KeePassXC.
 #---------------------------------------------------------------------------------------------------
-cat > /usr/local/lib/getAwsCredentials << 'EOF'
+cat > /usr/local/lib/getAwsCredentials << 'EOF2'
 #!/usr/bin/bash
 
 profile=${1}
@@ -51,14 +51,14 @@ usernameRegex='^attribute.UserName = '
 accessKeyId=$(secret-tool search Service aws Profile ${profile} 2>&1 | grep "${usernameRegex}" | sed "s/${usernameRegex}//")
 secretAccessKey=$(secret-tool lookup Service aws Profile ${profile})
 
-cat << EOF2
+cat << EOF
 {
 	"Version": 1,
 	"AccessKeyId": "${accessKeyId}",
 	"SecretAccessKey": "${secretAccessKey}"
 }
-EOF2
 EOF
+EOF2
 
 
 
@@ -91,7 +91,7 @@ flatpak override --filesystem=/opt/games/steam:create com.valvesoftware.Steam
 
 
 # Path of Exile stuff.
-sudo -u marcelotsvaz yay -S path-of-building-community-git awakened-poe-trade-git
+sudo -u marcelotsvaz yay -S path-of-building-community-git awakened-poe-trade-git exilence-next-git
 
 
 
