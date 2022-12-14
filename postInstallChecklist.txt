@@ -11,21 +11,21 @@ Change user and home dataset passwords
 Sync SDDM theme
 Add SMB credentials to /etc/samba/credentials/truneas
 Install VS Code extensions
-	vscode-icons-team.vscode-icons
+	4ops.packer
+	bmalehorn.vscode-fish
+	coolbear.systemd-unit-file
+	eamodio.gitlens
+	golang.go
+	hashicorp.terraform
+	medo64.render-crlf
+	mrcrowl.hg
 	ms-azuretools.vscode-docker
 	ms-python.python
-		ms-python.vscode-pylance
-		ms-toolsai.jupyter
-		ms-toolsai.jupyter-keymap
-	samuelcolvin.jinjahtml
-	bmalehorn.vscode-fish
-	mrcrowl.hg
+	ms-python.vscode-pylance
+	ms-vscode.hexeditor
 	pucelle.run-on-save
-	medo64.render-crlf
-	hashicorp.terraform
-	4ops.packer
-	coolbear.systemd-unit-file
-	arturock.gitstash
+	samuelcolvin.jinjahtml
+	vscode-icons-team.vscode-icons
 Install Firefox extensions:
 	uBlock Origin
 	KeePassXC-Browser
