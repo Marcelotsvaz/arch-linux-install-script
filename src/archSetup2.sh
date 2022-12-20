@@ -19,7 +19,7 @@ desktopEnvironment='plasma-desktop plasma-wayland-session libva-mesa-driver phon
 fonts='noto-fonts-cjk noto-fonts-emoji ttf-cascadia-code ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration drkonqi kde-gtk-config breeze-gtk'
-applications='dolphin gwenview ark spectacle qjackctl kimageformats qt5-imageformats'
+applications='dolphin gwenview ark spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats'
 
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms torbrowser-launcher'

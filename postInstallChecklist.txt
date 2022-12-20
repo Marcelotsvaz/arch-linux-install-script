@@ -15,6 +15,7 @@ Install VS Code extensions
 	bmalehorn.vscode-fish
 	coolbear.systemd-unit-file
 	eamodio.gitlens
+	GitLab.gitlab-workflow
 	golang.go
 	hashicorp.terraform
 	medo64.render-crlf
