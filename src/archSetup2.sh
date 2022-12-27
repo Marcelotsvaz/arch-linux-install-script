@@ -15,14 +15,14 @@ set -e
 # Install software.
 #---------------------------------------------------------------------------------------------------
 # Desktop enviroment.
-desktopEnvironment='plasma-desktop plasma-wayland-session libva-mesa-driver phonon-qt5-vlc sddm'
+desktopEnvironment='plasma-desktop plasma-wayland-session qt6-wayland libva-mesa-driver phonon-qt5-vlc sddm'
 fonts='noto-fonts-cjk noto-fonts-emoji ttf-cascadia-code ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
-applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration drkonqi kde-gtk-config breeze-gtk'
+applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin gwenview ark spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats'
 
 # Main applications.
-everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio v4l2loopback-dkms torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio torbrowser-launcher'
 developmentSoftware='konsole code docker docker-buildx docker-compose terraform packer ansible'
 misc='neofetch flatpak jre-openjdk'
 
