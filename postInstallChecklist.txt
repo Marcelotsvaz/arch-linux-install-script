@@ -26,6 +26,7 @@ Install VS Code extensions
 	ms-vscode.hexeditor
 	pucelle.run-on-save
 	samuelcolvin.jinjahtml
+	tamasfe.even-better-toml
 	vscode-icons-team.vscode-icons
 Install Firefox extensions:
 	uBlock Origin
