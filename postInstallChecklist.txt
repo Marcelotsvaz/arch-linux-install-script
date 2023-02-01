@@ -21,6 +21,7 @@ Install VS Code extensions
 	medo64.render-crlf
 	mrcrowl.hg
 	ms-azuretools.vscode-docker
+	ms-kubernetes-tools.vscode-kubernetes-tools
 	ms-python.python
 	ms-python.vscode-pylance
 	ms-vscode.hexeditor

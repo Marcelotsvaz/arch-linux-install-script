@@ -22,7 +22,7 @@ applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemm
 applications='dolphin dolphin-plugins gwenview ark spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio torbrowser-launcher'
-developmentSoftware='konsole code docker docker-buildx docker-compose terraform packer ansible'
+developmentSoftware='konsole code docker docker-buildx docker-compose kubectl minikube terraform packer ansible'
 misc='neofetch flatpak jre-openjdk'
 
 pacman --noconfirm -S													\
