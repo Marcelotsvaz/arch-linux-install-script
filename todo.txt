@@ -32,6 +32,11 @@ Maintenance
 noise-suppression-for-voice
 ZFS backup destination read-only
 Mount NAS shares with user unit and get password from KeePassXC
+swap:
+	zfs create -V 16G -b (getconf PAGESIZE) -o compression=zle -o logbias=throughput -o primarycache=metadata -o secondarycache=none rootPool/swap
+	sudo chmod 600 /dev/zvol/rootPool/swap
+	sudo mkswap /dev/zvol/rootPool/swap
+	sudo swapon /dev/zvol/rootPool/swap
 
 Configs:
 	Steam

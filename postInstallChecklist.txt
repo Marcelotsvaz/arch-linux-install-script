@@ -24,7 +24,9 @@ Install VS Code extensions
 	ms-kubernetes-tools.vscode-kubernetes-tools
 	ms-python.python
 	ms-python.vscode-pylance
+	ms-vscode.cpptools
 	ms-vscode.hexeditor
+	platformio.platformio-ide
 	pucelle.run-on-save
 	samuelcolvin.jinjahtml
 	tamasfe.even-better-toml
