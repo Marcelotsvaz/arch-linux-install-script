@@ -168,21 +168,22 @@ mkdir -p /usr/local/share/libalpm/scripts
 #-------------------------------------------------------------------------------
 cat > /usr/local/share/libalpm/scripts/mkinitcpio-install-unified << 'EOF'
 #!/usr/bin/bash
-kernelParameters='zfs=rootPool/root rw quiet udev.log_level=3'
+# Kernel parameters.
+echo 'zfs=rootPool/root rw quiet udev.log_level=3' > /etc/kernel/cmdline
 
 cd /boot
 for kernel in vmlinuz-*; do
 	pkgbase=${kernel#vmlinuz-}
 	
 	# Unified image.
-	objcopy																														\
-		--change-section-vma .osrel=0x20000		--add-section .osrel='/usr/lib/os-release'										\
-		--change-section-vma .cmdline=0x30000	--add-section .cmdline=<(echo ${kernelParameters})								\
-		--change-section-vma .splash=0x40000	--add-section .splash='/usr/share/systemd/bootctl/splash-arch.bmp'				\
-		--change-section-vma .linux=0x2000000	--add-section .linux="vmlinuz-${pkgbase}"										\
-		--change-section-vma .initrd=0x3000000	--add-section .initrd=<(cat $(compgen -G *-ucode.img) initramfs-${pkgbase}.img)	\
-		'/usr/lib/systemd/boot/efi/linuxx64.efi.stub'																			\
-		"efi/${pkgbase}.efi"
+	/usr/lib/systemd/ukify									\
+		vmlinuz-${pkgbase}									\
+		*-ucode.img											\
+		initramfs-${pkgbase}.img							\
+		--cmdline @/etc/kernel/cmdline						\
+		--os-release @/usr/lib/os-release					\
+		--splash /usr/share/systemd/bootctl/splash-arch.bmp	\
+		--output "efi/${pkgbase}.efi"
 	
 	# UEFI boot entry.
 	efiPartition="/dev/disk/by-partuuid/$(lsblk -nro PARTUUID,MOUNTPOINTS | grep ' /boot/efi$' | cut -d ' ' -f1)"
