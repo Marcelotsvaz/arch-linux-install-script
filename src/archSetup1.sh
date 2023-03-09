@@ -60,7 +60,7 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 
 
 # Install packages.
-system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr'
+system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr systemd-ukify'
 shell='fish exa htop tmux picocom'
 tools='sudo nano rsync gdisk man-db man-pages'
 developmentTools='git mercurial aws-cli openssh python-pip python-pylint python-isort yapf'
