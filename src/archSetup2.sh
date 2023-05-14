@@ -21,7 +21,7 @@ audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin dolphin-plugins gwenview ark spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
 # Main applications.
-everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh discord cups obs-studio torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
 developmentSoftware='konsole code docker docker-buildx docker-compose kubectl minikube kompose terraform packer ansible'
 misc='neofetch flatpak jre-openjdk'
 
@@ -29,7 +29,7 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice amazon-ecr-credential-helper obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice amazon-ecr-credential-helper discord_arch_electron obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin
 
 systemctl --global enable pipewire-pulse
 systemctl enable sddm docker.socket
