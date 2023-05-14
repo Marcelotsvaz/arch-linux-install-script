@@ -1,5 +1,5 @@
 # 
-# 
+# Arch Linux Install Script
 # 
 # 
 # Author: Marcelo Tellier Sartori Vaz
@@ -10,27 +10,6 @@ Sync documents and desktop
 Change user and home dataset passwords
 Sync SDDM theme
 Add SMB credentials to /etc/samba/credentials/truneas
-Install VS Code extensions
-	4ops.packer
-	bmalehorn.vscode-fish
-	coolbear.systemd-unit-file
-	eamodio.gitlens
-	GitLab.gitlab-workflow
-	golang.go
-	hashicorp.terraform
-	medo64.render-crlf
-	mrcrowl.hg
-	ms-azuretools.vscode-docker
-	ms-kubernetes-tools.vscode-kubernetes-tools
-	ms-python.python
-	ms-python.vscode-pylance
-	ms-vscode.cpptools
-	ms-vscode.hexeditor
-	platformio.platformio-ide
-	pucelle.run-on-save
-	samuelcolvin.jinjahtml
-	tamasfe.even-better-toml
-	vscode-icons-team.vscode-icons
 Install Firefox extensions:
 	uBlock Origin
 	KeePassXC-Browser

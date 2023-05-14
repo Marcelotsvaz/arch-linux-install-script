@@ -1,6 +1,5 @@
 Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
 Check relative path in mkinitcpio hook
-Go
 Check EDITOR VISUAL
 Fix terminal scroll in SSH
 Aliases with sudo
@@ -14,21 +13,12 @@ File name dates should include timezone?
 Recovery partition (clone?) / rescue and emergency targets
 Print progress information on scripts
 Create datasets on setup instead of install script
-Fix docker network
-Check docker usergroup
-Install virt-manager
-https://aur.archlinux.org/packages/discord_arch_electron
-https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+Check docker usergroups
 https://www.freedesktop.org/software/systemd/man/pam_systemd_home.html
 https://unix.stackexchange.com/questions/236659/what-is-the-point-of-mv-f-when-default-behavior-already-overwrites-files
 https://stackoverflow.com/questions/28261972/redirect-file-access
 https://github.com/openzfs/zfs/issues/13128
-Firefox and Thunderbird addons
 Fan control
-Maintenance
-	sudo pacman -R (pacman -Qdtq)	# Delete orphanated packages
-	sudo pacman -Scc	# Clean cache
-noise-suppression-for-voice
 ZFS backup destination read-only
 Mount NAS shares with user unit and get password from KeePassXC
 swap:
@@ -36,6 +26,11 @@ swap:
 	sudo chmod 600 /dev/zvol/rootPool/swap
 	sudo mkswap /dev/zvol/rootPool/swap
 	sudo swapon /dev/zvol/rootPool/swap
+
+Add to script:
+	noise-suppression-for-voice
+	virt-manager
+	go
 
 Configs:
 	Steam
@@ -47,29 +42,12 @@ Wine:
 	Affinity Photo
 	Affinity Designer
 
-Tools:
-	ripgrep
-	zoxide
-
-The Wayland connection broke. Did the Wayland compositor die?
-	https://bugreports.qt.io/browse/QTBUG-66997
-	https://bugs.kde.org/show_bug.cgi?id=392376
-	https://codereview.qt-project.org/c/qt/qtwayland/+/224622/
-
-Wayland:
-	https://www.fosskers.ca/en/blog/wayland
-
 Fonts:
 	Noto bloat
 	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
 	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
 	https://www.nerdfonts.com/
 	adobe-source-sans-fonts otf-ipafont noto-fonts-lite
-
-ZFS Compression:
-	None: 13:09s 9.67G
-	lz4: R1.77x
-	zstd 13:45s 5.38G R1.91x
 
 
 # TrueNAS permissions.
