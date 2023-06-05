@@ -21,7 +21,7 @@ audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin dolphin-plugins gwenview ark spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
 # Main applications.
-everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox gst-libav vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
 developmentSoftware='konsole code docker docker-buildx docker-compose kubectl minikube kompose terraform packer ansible'
 misc='neofetch flatpak jre-openjdk'
 
