@@ -176,10 +176,10 @@ for kernel in vmlinuz-*; do
 	pkgbase=${kernel#vmlinuz-}
 	
 	# Unified image.
-	/usr/lib/systemd/ukify									\
-		vmlinuz-${pkgbase}									\
-		*-ucode.img											\
-		initramfs-${pkgbase}.img							\
+	/usr/lib/systemd/ukify build							\
+		--linux vmlinuz-${pkgbase}							\
+		--initrd *-ucode.img								\
+		--initrd initramfs-${pkgbase}.img					\
 		--cmdline @/etc/kernel/cmdline						\
 		--os-release @/usr/lib/os-release					\
 		--splash /usr/share/systemd/bootctl/splash-arch.bmp	\
