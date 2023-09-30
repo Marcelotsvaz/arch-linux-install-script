@@ -1,8 +1,18 @@
+Merge pacman and yay commands
+python-gitlab for Ansbile
+v4l2loopback-dkms
+waydroid:
+	yay -Syu binder_linux-dkms waydroid
+	sudo waydroid init -s GAPPS
+	yay python-pyclip
+	wl-clipboard
+	waydroid prop set persist.waydroid.multi_windows true
 Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
 Check relative path in mkinitcpio hook
 Check EDITOR VISUAL
 Fix terminal scroll in SSH
 Aliases with sudo
+Alias pacman update with ZFS snapshot
 Baloo python venv - balooctl config add excludeFilters env
 mDNS with systemd-networkd
 CUPS socket activation
