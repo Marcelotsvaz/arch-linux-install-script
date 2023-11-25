@@ -1,12 +1,4 @@
 Merge pacman and yay commands
-python-gitlab for Ansbile
-v4l2loopback-dkms
-waydroid:
-	yay -Syu binder_linux-dkms waydroid
-	sudo waydroid init -s GAPPS
-	yay python-pyclip
-	wl-clipboard
-	waydroid prop set persist.waydroid.multi_windows true
 Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
 Check relative path in mkinitcpio hook
 Check EDITOR VISUAL
@@ -23,6 +15,7 @@ File name dates should include timezone?
 Recovery partition (clone?) / rescue and emergency targets
 Print progress information on scripts
 Create datasets on setup instead of install script
+Noto bloat
 Check docker usergroups
 https://www.freedesktop.org/software/systemd/man/pam_systemd_home.html
 https://unix.stackexchange.com/questions/236659/what-is-the-point-of-mv-f-when-default-behavior-already-overwrites-files
@@ -41,6 +34,17 @@ Add to script:
 	noise-suppression-for-voice
 	virt-manager
 	go
+	python-gitlab for Ansibile
+	v4l2loopback-dkms
+	yay:
+		go-jsonnet jsonnet-bundler
+		jinja2-cli
+	waydroid:
+		yay -Syu binder_linux-dkms waydroid
+		sudo waydroid init -s GAPPS
+		yay python-pyclip
+		wl-clipboard
+		waydroid prop set persist.waydroid.multi_windows true
 
 Configs:
 	Steam
@@ -52,12 +56,6 @@ Wine:
 	Affinity Photo
 	Affinity Designer
 
-Fonts:
-	Noto bloat
-	https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
-	https://wiki.archlinux.org/title/Font_configuration/Examples#Default_fonts
-	https://www.nerdfonts.com/
-	adobe-source-sans-fonts otf-ipafont noto-fonts-lite
 
 
 # TrueNAS permissions.

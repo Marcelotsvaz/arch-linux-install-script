@@ -330,9 +330,9 @@ system_default = system_default_sect
 
 [system_default_sect]
 MinProtocol = TLSv1.2
-CipherSuites = TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384
-CipherString = ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES256-GCM-SHA384;
-Curves = X25519:secp521r1
+CipherSuites = TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256
+CipherString = ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256
+Curves = X25519:secp521r1:secp384r1
 EOF
 #-------------------------------------------------------------------------------
 
@@ -357,6 +357,8 @@ cat >> /etc/ssh/ssh_config << 'EOF'
 
 
 # Custom configuration.
+UserKnownHostsFile ~/.config/ssh/known_hosts
+
 Match LocalUser marcelotsvaz
 	Include /home/marcelotsvaz/.config/ssh/config
 EOF
