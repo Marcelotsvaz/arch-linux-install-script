@@ -259,27 +259,37 @@ echo 'auth       required                    pam_exec.so          expose_authtok
 # Snapshot script.
 #-------------------------------------------------------------------------------
 cat > /usr/local/bin/backup << 'EOF'
-#!/usr/bin/bash
+#!/usr/bin/fish
 
-export SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
-datasets='rootPool rootPool/root rootPool/home rootPool/games'
-backupDataset='dataPool/backups'
-sshTarget='marcelotsvaz@truenas.lan'
+set -x SSH_AUTH_SOCK /run/user/1000/ssh-agent.socket
 
-if [[ -z "${1}" ]]; then
-	snapshotReason='manual'
+set datasets rootPool rootPool/root rootPool/home rootPool/games
+set backupDataset dataPool/backups
+set sshTarget marcelotsvaz@truenas.lan
+
+set currentTime $(date +'%Y-%m-%dT%H:%M')
+
+if set -q argv[1]
+	set backupSource $argv[1]
 else
-	snapshotReason="${1}"
-fi
+	set backupSource manual
+end
 
-for dataset in ${datasets}; do
-	newSnapshot="${dataset}@${snapshotReason}-$(date +'%Y-%m-%dT%H:%M')"
-	zfs snapshot "${newSnapshot}"
+
+echo Starting $backupSource backup at $currentTime.
+
+
+for dataset in $datasets
+	echo Backing up dataset $dataset.
+	set newSnapshot $dataset@$backupSource$currentTime
+	zfs snapshot $newSnapshot
 	
-	lastSnapshot=$(ssh ${sshTarget} zfs list -Ht snapshot -S creation -o name ${backupDataset}/${dataset} | head -n 1)
-	zfs send -pwI "${lastSnapshot#${backupDataset}/}" "${newSnapshot}" \
-	| ssh ${sshTarget} zfs receive -Fux mountpoint "${backupDataset}/${dataset}"
-done
+	echo Uploading snapshot $newSnapshot to dataset $backupDataset at $sshTarget.
+	set lastUploadedSnapshot $(ssh $sshTarget zfs list -Ht snapshot -s creation -o name $backupDataset/$dataset)[-1]
+	set lastUploadedSnapshot $(string replace --regex "^.+@" @ $lastUploadedSnapshot)
+	zfs send -pwI $lastUploadedSnapshot $newSnapshot \
+	| ssh $sshTarget zfs receive -Fux mountpoint $backupDataset/$dataset
+end
 EOF
 #-------------------------------------------------------------------------------
 chmod +x /usr/local/bin/backup
