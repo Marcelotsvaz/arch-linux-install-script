@@ -1,20 +1,37 @@
-Merge pacman and yay commands
+Secure boot
+Check EDITOR VISUAL
+SDDM Git: Fix hack and wayland
+Recovery partition (clone?) / rescue and emergency targets
+Create datasets on setup instead of install script
+	noise-suppression-for-voice
 Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
 Check relative path in mkinitcpio hook
-Check EDITOR VISUAL
+Laptop:
+	iwd sof-firmware iio-sensor-proxy maliit-keyboard bluedevil
+	/etc/iwd/main.conf
+		[General]
+		EnableNetworkConfiguration = True
+	systemctl enable iwd bluetooth
+	iwctl station wlan0 scan
+	set net "$(sudo iwctl station wlan0 get-networks | grep VAZ | cut -d " " -f 7) iPhone"
+	iwctl station wlan0 connect $net
+iphone:
+	fuse-overlayfs
+	ifuse
+	gvfs-afc
+	gvfs-gphoto2
+
+
+
+Merge pacman and yay commands
 Fix terminal scroll in SSH
 Aliases with sudo
 Alias pacman update with ZFS snapshot
 Baloo python venv - balooctl config add excludeFilters env
 mDNS with systemd-networkd
 CUPS socket activation
-Secure boot
 UEFI Hacking
-SDDM Git: Fix hack and wayland
 File name dates should include timezone?
-Recovery partition (clone?) / rescue and emergency targets
-Print progress information on scripts
-Create datasets on setup instead of install script
 Noto bloat
 Check docker usergroups
 https://www.freedesktop.org/software/systemd/man/pam_systemd_home.html
@@ -31,11 +48,22 @@ swap:
 	sudo swapon /dev/zvol/rootPool/swap
 
 Add to script:
-	noise-suppression-for-voice
-	virt-manager
-	go
-	python-gitlab for Ansibile
+	virt-manager:
+		virt-manager
+		qemu-desktop
+		dnsmasq
+		edk2-ovmf
+		iptables-nft
+		ntfs-3g
+	foomatic-db
+	go:
+		go
+		gopls
+		delve
 	v4l2loopback-dkms
+	dehydrated
+	mkcert
+	npm
 	yay:
 		go-jsonnet jsonnet-bundler
 		jinja2-cli
