@@ -281,7 +281,7 @@ echo Starting $backupSource backup at $currentTime.
 
 for dataset in $datasets
 	echo Backing up dataset $dataset.
-	set newSnapshot $dataset@$backupSource$currentTime
+	set newSnapshot $dataset@$backupSource-$currentTime
 	zfs snapshot $newSnapshot
 	
 	echo Uploading snapshot $newSnapshot to dataset $backupDataset at $sshTarget.
