@@ -16,7 +16,7 @@ set -e
 #---------------------------------------------------------------------------------------------------
 # Desktop enviroment.
 desktopEnvironment='plasma-desktop plasma-wayland-session xdg-desktop-portal-kde qt6-wayland libva-mesa-driver phonon-qt5-vlc sddm'
-fonts='noto-fonts-cjk ttf-twemoji ttf-cascadia-code ttf-liberation'
+fonts='noto-fonts-cjk ttf-twemoji ttf-cascadia-code-nerd ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk'
 applications='dolphin dolphin-plugins kfind gwenview ark unrar p7zip spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
