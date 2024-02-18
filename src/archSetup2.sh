@@ -29,7 +29,7 @@ pacman --noconfirm -S													\
 	${desktopEnvironment} ${fonts} ${audio} ${applets} ${applications}	\
 	${everydaySoftware} ${developmentSoftware} ${misc}
 	
-sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice amazon-ecr-credential-helper discord_arch_electron obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin
+sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice amazon-ecr-credential-helper discord_arch_electron obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin postman-bin
 
 systemctl --global enable pipewire-pulse
 systemctl enable sddm docker.socket
