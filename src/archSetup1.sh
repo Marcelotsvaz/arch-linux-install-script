@@ -62,7 +62,7 @@ ln -s /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
 # Install packages.
 system='linux linux-firmware intel-ucode base-devel linux-headers mkinitcpio efibootmgr systemd-ukify'
 shell='fish exa htop tmux picocom'
-tools='sudo nano nano-syntax-highlighting man-db man-pages jq wget gptfdisk rsync'
+tools='sudo nano nano-syntax-highlighting man-db man-pages jq wget gptfdisk dosfstools rsync'
 developmentTools='git mercurial aws-cli-v2 openssh python-pip python-pylint yapf'
 
 pacman --noconfirm --needed -Sy ${system} ${shell} ${tools} ${developmentTools}

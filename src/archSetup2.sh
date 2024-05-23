@@ -15,7 +15,7 @@ set -e
 # Install software.
 #---------------------------------------------------------------------------------------------------
 # Desktop enviroment.
-desktopEnvironment='plasma-desktop plasma-wayland-session xdg-desktop-portal-kde qt6-wayland libva-mesa-driver phonon-qt5-vlc sddm'
+desktopEnvironment='plasma-desktop libva-mesa-driver sddm'
 fonts='noto-fonts-cjk ttf-twemoji ttf-cascadia-code-nerd ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk solaar'

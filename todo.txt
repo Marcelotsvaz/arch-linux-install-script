@@ -4,7 +4,6 @@ SDDM Git: Fix hack and wayland
 Recovery partition (clone?) / rescue and emergency targets
 Create datasets on setup instead of install script
 	noise-suppression-for-voice
-Check MODULES_DECOMPRESS in mkinitcpio https://bugs.archlinux.org/task/72882
 Check relative path in mkinitcpio hook
 Laptop:
 	iwd sof-firmware iio-sensor-proxy maliit-keyboard bluedevil
