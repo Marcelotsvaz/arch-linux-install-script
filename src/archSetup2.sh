@@ -21,7 +21,7 @@ audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk solaar'
 applications='dolphin dolphin-plugins kfind gwenview ark unrar p7zip spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
 # Main applications.
-everydaySoftware='firefox chromium thunderbird keepassxc rhythmbox gst-libav vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
+everydaySoftware='firefox chromium thunderbird keepassxc yubikey-manager-qt rhythmbox gst-libav vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
 developmentSoftware='konsole code python-pdm python-keyring docker docker-buildx docker-compose kubectl minikube kompose terraform packer ansible'
 misc='neofetch flatpak jre-openjdk'
 
@@ -32,7 +32,7 @@ pacman --noconfirm -S													\
 sudo -u marcelotsvaz yay -S code-marketplace code-features docker-credential-secretservice amazon-ecr-credential-helper discord_arch_electron obs-plugin-ios-camera-source-git obs-ndi ndi-sdk multimc-bin postman-bin
 
 systemctl --global enable pipewire-pulse
-systemctl enable sddm docker.socket
+systemctl enable sddm docker.socket pcscd
 archlinux-java set java-19-openjdk
 
 
