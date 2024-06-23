@@ -1,3 +1,5 @@
+https://systemd.io/CREDENTIALS/
+https://wiki.archlinux.org/title/Systemd-homed
 Secure boot
 Check EDITOR VISUAL
 SDDM Git: Fix hack and wayland

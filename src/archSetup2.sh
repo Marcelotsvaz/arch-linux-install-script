@@ -19,7 +19,7 @@ desktopEnvironment='plasma-desktop libva-mesa-driver sddm'
 fonts='noto-fonts-cjk ttf-twemoji ttf-cascadia-code-nerd ttf-liberation'
 audio='pipewire pipewire-alsa pipewire-jack pipewire-pulse'
 applets='kscreen plasma-pa kinfocenter plasma-disks print-manager plasma-systemmonitor sddm-kcm plasma-browser-integration kdeconnect drkonqi kde-gtk-config breeze-gtk solaar'
-applications='dolphin dolphin-plugins kfind gwenview ark unrar p7zip spectacle kcalc ksystemlog qjackctl kimageformats qt5-imageformats ffmpegthumbs kdegraphics-thumbnailers'
+applications='dolphin dolphin-plugins kfind gwenview ark unrar p7zip spectacle kcalc ksystemlog qjackctl kimageformats qt6-imageformats ffmpegthumbs kdegraphics-thumbnailers'
 # Main applications.
 everydaySoftware='firefox chromium thunderbird keepassxc yubikey-manager-qt rhythmbox gst-libav vlc okular libreoffice-fresh cups obs-studio torbrowser-launcher'
 developmentSoftware='konsole code python-pdm python-keyring docker docker-buildx docker-compose kubectl minikube kompose terraform packer ansible'
